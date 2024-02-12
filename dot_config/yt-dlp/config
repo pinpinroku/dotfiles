@@ -1,0 +1,10 @@
+# Download HLS video
+--retries 5
+--batch-file "~/Documents/input_list.txt"
+--paths home:"~/Videos/"
+--download-archive "~/.cache/yt-dlp/archive.log"
+--no-mtime
+--ignore-errors
+--output '%(alt_title,title|Unknown)s.%(ext)s'
+--concurrent-fragments 6
+--embed-thumbnail

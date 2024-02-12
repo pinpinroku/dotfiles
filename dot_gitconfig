@@ -1,0 +1,11 @@
+[init]
+	defaultBranch = main
+[user]
+	name = pinpinroku
+	email = pinpinroku11600@tutanota.com
+[commit]
+	template = ~/.gitmessage
+[git]
+	fetch = "prune"
+[core]
+	editor = hx
