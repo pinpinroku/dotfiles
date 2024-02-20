@@ -2,6 +2,7 @@
 --retries 5
 --batch-file "~/Documents/input_list.txt"
 --paths home:"~/Videos/"
+--paths temp:"~/.cache/yt-dlp/temp/"
 --download-archive "~/.cache/yt-dlp/archive.log"
 --no-mtime
 --ignore-errors

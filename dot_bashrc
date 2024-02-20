@@ -7,6 +7,18 @@ export VISUAL=hx
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export _ZO_FZF_OPTS="--exact"
+export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+export FZF_DEFAULT_OPTS="--ansi --layout=reverse --border=bold --preview='bat --color=always --style=numbers --line-range=:500 {}' --preview-window='right:50%,border-vertical'"
+
+function ya() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # If not running interactively, don't do anything
 case $- in
@@ -121,3 +133,7 @@ eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 . "$HOME/.cargo/env"
 eval "$(pyenv virtualenv-init -)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

@@ -11,8 +11,8 @@ config.initial_rows = 26
 -- config.front_end = "WebGpu"
 -- config.webgpu_power_preference = "HighPerformance"
 
-config.window_background_opacity = 0.8
-config.text_background_opacity = 0.4
+-- config.window_background_opacity = 0.8
+-- config.text_background_opacity = 0.4
 
 -- Appearance
 config.color_scheme = "kanagawabones"
@@ -35,7 +35,7 @@ config.hide_tab_bar_if_only_one_tab = true
 
 -- Behaviour
 config.audible_bell = "Disabled"
-config.animation_fps = 30
+-- config.animation_fps = 30
 
 -- Leader
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
