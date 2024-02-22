@@ -23,3 +23,5 @@ alias wezterm='flatpak run org.wezfurlong.wezterm'
 alias list='hx ~/Documents/input_list.txt'
 alias note='hx ~/Sync/note/'
 alias fp='ffprobe -hide_banner '
+
+alias code='codium'
