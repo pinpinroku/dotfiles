@@ -10,6 +10,7 @@ eval "$(pyenv init -)"
 export _ZO_FZF_OPTS="--exact"
 export FZF_DEFAULT_COMMAND="fd --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi --layout=reverse --border=bold --preview='bat --color=always --style=numbers --line-range=:500 {}' --preview-window='right:50%,border-vertical'"
+export PATH="$PATH:/opt/nvim/"
 
 function ya() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
@@ -19,6 +20,11 @@ function ya() {
 	fi
 	rm -f -- "$tmp"
 }
+
+# alias for image preview in specific terminal
+if [[ $TERM_PROGRAM == "WezTerm" || $TERM_PROGRAM == "Hyper" ]]; then
+    alias ic='wezterm imgcat'
+fi
 
 # If not running interactively, don't do anything
 case $- in

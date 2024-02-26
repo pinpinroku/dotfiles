@@ -7,12 +7,12 @@ if wezterm.config_builder then
 end
 
 config.initial_cols = 105
-config.initial_rows = 26
+config.initial_rows = 28
 -- config.front_end = "WebGpu"
 -- config.webgpu_power_preference = "HighPerformance"
 
--- config.window_background_opacity = 0.8
--- config.text_background_opacity = 0.4
+config.window_background_opacity = 0.9
+config.text_background_opacity = 0.4
 
 -- Appearance
 config.color_scheme = "kanagawabones"
@@ -26,12 +26,13 @@ config.window_padding = {
 -- Font
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrainsMono Nerd Font", scale=1.0 },
+	{ family = "Monaspace Xenon", scale=1.0 },
 	{ family = "IBM Plex Sans JP", scale=1.0 },
 })
 config.font_size = 18
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
--- config.tab_bar_at_bottom = true
+config.tab_bar_at_bottom = true
 
 -- Behaviour
 config.audible_bell = "Disabled"
