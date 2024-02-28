@@ -1,0 +1,26 @@
+{
+  "prefs": {
+    "HasAutoOpenedWelcomeFolder": "true",
+    "DismissedWarpAIWarmWelcome": "true",
+    "TelemetryEnabled": "false",
+    "AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":3,\"next_refresh_time\":\"2024-02-28T07:03:22.212724Z\"}",
+    "Theme": "\"CyberWave\"",
+    "HasDismissedWarpDriveWelcome": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "ReceivedReferralTheme": "\"Inactive\"",
+    "CrashReportingEnabled": "false",
+    "FontSize": "24.0",
+    "VimKeybindingsBannerState": "\"Dismissed\"",
+    "WelcomeTipsCompleted": "true",
+    "OverrideOpacity": "100",
+    "Shortcuts": "true",
+    "AliasExpansionBannerSeen": "true",
+    "EmacsBindingsBannerState": "\"Dismissed\"",
+    "VimModeEnabled": "true",
+    "ExperimentId": "5b9cd22b-c9cd-4cd8-ac90-9f3bef7c31cf",
+    "FontName": "\"JetBrainsMono Nerd Font\"",
+    "ChangelogVersions": "{\"v0.2024.02.20.08.01.stable_01\":true,\"v0.2024.02.20.08.01.stable_02\":true}",
+    "WorkflowsBoxOpen": "true",
+    "WelcomeTipsFeaturesUsed": "[{\"Hint\":\"CreateBlock\"},{\"Action\":\"CommandPalette\"},{\"Hint\":\"BlockSelect\"},{\"Action\":\"ThemePicker\"},{\"Action\":\"CommandSearch\"},{\"Action\":\"AiCommandSearch\"},{\"Action\":\"OpenWarpDrive\"},{\"Action\":\"WarpAI\"},{\"Action\":\"SplitPane\"},{\"Hint\":\"BlockAction\"}]"
+  }
+}
