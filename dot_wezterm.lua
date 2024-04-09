@@ -6,6 +6,11 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+config.default_prog = { "fish" }
+config.launch_menu = {
+	{ label = "Bottom", args = { "btm" } },
+}
+
 config.initial_cols = 105
 config.initial_rows = 28
 -- config.front_end = "WebGpu"
@@ -25,9 +30,9 @@ config.window_padding = {
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	{ family = "JetBrainsMono Nerd Font", scale=1.0 },
-	{ family = "Monaspace Xenon", scale=1.0 },
-	{ family = "IBM Plex Sans JP", scale=1.0 },
+	{ family = "JetBrainsMono Nerd Font", scale = 1.2, italic = true },
+	{ family = "Mononoki Nerd Font", scale = 1.2, italic = true },
+	{ family = "IBM Plex Sans JP", scale = 1.2 },
 })
 config.font_size = 18
 config.window_decorations = "RESIZE"
