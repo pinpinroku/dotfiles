@@ -249,7 +249,7 @@ end
 function play-random-album
     set -l playlist '/tmp/random_album.m3u8'
     fd . -td --min-depth 3 -a ~/Music | shuf > $playlist
-    mpv --no-config --no-audio-display --no-resume-playback --image-display-duration=0 $playlist
+    mpv --profile=music $playlist
 end
 
 ## Wine settings and aliases ##
