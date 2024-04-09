@@ -1,0 +1,48 @@
+theme = "kanagawa"
+
+[editor]
+mouse = false
+line-number = "relative"
+gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
+true-color = true
+cursorline = true
+undercurl = true
+auto-save = true
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+[editor.soft-wrap]
+enable = false
+
+[keys.normal]
+";" = "command_mode"
+esc = "collapse_selection"
+tab = ":buffer-next"
+S-tab = ":buffer-previous"
+C-c = [ "select_all", "yank_to_clipboard", "collapse_selection", "goto_file_start" ]
+space = { "/" = "toggle_comments", "g" = "global_search", x = ":buffer-close" }
+i = ["collapse_selection", "insert_mode"]
+a = ["move_char_right", "collapse_selection", "insert_mode"]
+
+[keys.normal."+"]
+b = ":run-shell-command cargo build"
+r = ":run-shell-command cargo run"
+t = ":run-shell-command cargo test"
+
+[keys.normal."minus"]
+r = ":run-shell-command poetry run python -m src.main"
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
