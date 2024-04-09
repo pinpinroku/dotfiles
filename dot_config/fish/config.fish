@@ -196,7 +196,9 @@ alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {
 alias hz 'hx (fzp)'
 
 # Run tvdl
-alias tvdl-cli 'poetry run -C ~/repos/tvdl/ -vv -- tvdl'
+if test -d ~/repos/tvdl
+    alias tvdl-cli 'poetry run -C ~/repos/tvdl/ -vv -- tvdl'
+end
 
 # Run yt-dlp with the specified profile
 function yt
