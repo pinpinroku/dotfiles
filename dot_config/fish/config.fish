@@ -181,7 +181,6 @@ zoxide init fish | source
 
 ## Aliases ##
 alias v nvim
-alias nv neovide
 alias cp 'cp -iv'
 alias mv 'mv -iv'
 alias cl clear

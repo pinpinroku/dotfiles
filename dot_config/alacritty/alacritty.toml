@@ -6,8 +6,7 @@ shell = "fish"
 size = 18.0
 
 [font.normal]
-# family = "JetBrainsMono Nerd Font"
-family = "MonaspiceAr Nerd Font"
+family = "JetBrainsMono Nerd Font"
 
 [window]
 decorations = "None"
@@ -20,14 +19,14 @@ x = 0
 y = 0
 
 [window.dimensions]
-columns = 120
+columns = 115
 lines = 30
 
 [selection]
 save_to_clipboard = true
 
 [cursor]
-blink_timeout = 0
+blink_timeout = 15
 thickness = 0.2
 
 [cursor.style]
