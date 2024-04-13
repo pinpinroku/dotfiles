@@ -169,9 +169,7 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    if test $TERM = alacritty
-        neofetch
-    else
+    if not test $TERM = alacritty
         fastfetch --load-config dr460nized
     end
 end
@@ -194,6 +192,9 @@ alias erase 'exiftool -overwrite_original -all= ' # Remove all metadata from an 
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias hz 'hx (fzp)'
+alias zl zellij
+alias zla 'zellij attach'
+alias zls 'zellij list-sessions'
 
 # Run tvdl
 if test -d ~/repos/tvdl
@@ -264,4 +265,36 @@ end
 function celeste
     set -xl WINEPREFIX "$HOME/Games/Celeste"
     env LANG=ja_JP.utf8 wine "C:\\Program Files\\Celeste\\Celeste.exe"
+end
+
+function ffmd
+    echo "What is the title of this file?"
+    read -P "Enter title: " title
+
+    echo "\nWho performs in this file?"
+    read -P "Enter artist(s): " artist
+
+    echo "\nWhere to save it?"
+    read -P "Enter destination: " dest
+
+    echo "\nPlease confirm the details:"
+    echo "Title: $title"
+    echo "Artist: $artist"
+    echo "Destination: $dest"
+
+    read -P "\nOverwrite metadata with these values? [Y/n] " confirm
+
+    if test "$confirm" = Y -o "$confirm" = y
+        ffmpeg -i $argv -map_metadata -1 -metadata title="$title" -metadata artist="$artist" -c copy "$dest"
+    else
+        echo "Operation cancelled"
+    end
+end
+
+# Start zellij if the terminal is alacritty
+if test $TERM = alacritty
+    if set -q ZELLIJ
+    else
+        zellij attach python-dev
+    end
 end

@@ -9,18 +9,10 @@ size = 18.0
 family = "JetBrainsMono Nerd Font"
 
 [window]
-decorations = "None"
-dynamic_padding = true
-opacity = 0.75
+opacity = 0.7
 blur = false
-
-[window.padding]
-x = 0
-y = 0
-
-[window.dimensions]
-columns = 115
-lines = 30
+decorations = "None"
+startup_mode = "Maximized"
 
 [selection]
 save_to_clipboard = true
@@ -39,13 +31,3 @@ blinking = "Off"
 
 [mouse]
 hide_when_typing = true
-
-[[keyboard.bindings]]
-key = "N"
-mods = "Control|Shift"
-action = "CreateNewWindow"
-
-[[keyboard.bindings]]
-key = "T"
-mods = "Control|Shift"
-action = "SpawnNewInstance"

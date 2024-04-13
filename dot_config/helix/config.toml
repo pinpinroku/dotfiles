@@ -1,11 +1,14 @@
-theme = "kanagawa"
+# theme = "kanagawa"
+# theme = "nord-night"
+# theme = "dark_plus"  # VSCode Dark +
+theme = "catppuccin_frappe"
 
 [editor]
 mouse = false
 line-number = "relative"
 gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
 true-color = true
-cursorline = true
+# cursorline = true
 undercurl = true
 auto-save = true
 bufferline = "multiple"
