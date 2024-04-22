@@ -44,7 +44,7 @@ end
 
 
 ## Advanced command-not-found hook
-source /usr/share/doc/find-the-command/ftc.fish
+# source /usr/share/doc/find-the-command/ftc.fish
 
 
 ## Functions
@@ -169,7 +169,7 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    if not test $TERM = alacritty
+    if test $TERM = xterm-256color
         fastfetch --load-config dr460nized
     end
 end
@@ -178,12 +178,10 @@ end
 zoxide init fish | source
 
 ## Aliases ##
-alias v nvim
 alias cp 'cp -iv'
 alias mv 'mv -iv'
 alias cl clear
 alias cls clear
-alias lsd eza
 alias note 'helix ~/Sync/note'
 alias list 'helix ~/Documents/input_list.txt'
 alias fig 'helix ~/.config/fish/config.fish'
@@ -254,30 +252,26 @@ function play-random-album
 end
 
 ## Wine settings and aliases ##
-set -x LANG 'ja_JP.utf8'
 set -x WINEARCH win32
 
 function fb2k
+    set -xl LANG 'ja_JP.utf8'
     set -xl WINEPREFIX "$HOME/WindowsApps/foobar2000"
     env LANG=ja_JP.utf8 wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
 function celeste
+    set -xl LANG 'ja_JP.utf8'
     set -xl WINEPREFIX "$HOME/Games/Celeste"
     env LANG=ja_JP.utf8 wine "C:\\Program Files\\Celeste\\Celeste.exe"
 end
 
 function ffmd
-    echo "What is the title of this file?"
     read -P "Enter title: " title
-
-    echo "\nWho performs in this file?"
     read -P "Enter artist(s): " artist
-
-    echo "\nWhere to save it?"
     read -P "Enter destination: " dest
 
-    echo "\nPlease confirm the details:"
+    echo "Please confirm the details:"
     echo "Title: $title"
     echo "Artist: $artist"
     echo "Destination: $dest"
@@ -288,13 +282,5 @@ function ffmd
         ffmpeg -i $argv -map_metadata -1 -metadata title="$title" -metadata artist="$artist" -c copy "$dest"
     else
         echo "Operation cancelled"
-    end
-end
-
-# Start zellij if the terminal is alacritty
-if test $TERM = alacritty
-    if set -q ZELLIJ
-    else
-        zellij attach python-dev
     end
 end
