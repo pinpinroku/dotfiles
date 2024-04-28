@@ -1,9 +1,6 @@
 # theme = "kanagawa"
-# theme = "nord-night"
-# theme = "dark_plus"  # VSCode Dark +
-# theme = "catppuccin_frappe"
-# theme = "catppuccin_macchiato"
-theme = "rose_pine"
+theme = "catppuccin_macchiato"
+# theme = "rose_pine"
 
 [editor]
 mouse = false

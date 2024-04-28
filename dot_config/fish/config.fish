@@ -230,7 +230,7 @@ if test -d ~/.cargo/bin
     end
 end
 
-# Shell completion for poetry
+# Python Poetry
 poetry completions fish >~/.config/fish/completions/poetry.fish
 
 # `ya` shell wrapper that provides the ability
