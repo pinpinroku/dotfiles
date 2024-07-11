@@ -192,7 +192,7 @@ alias hz 'hx (fzp)'
 alias zl zellij
 alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
-alias code 'code --ozone-platform=wayland'
+alias code 'code --ozone-platform=wayland --wayland-ime'
 
 # Run tvdl
 if test -d ~/repos/tvdl
@@ -222,6 +222,7 @@ set -x VISUAL /usr/bin/helix
 set -x BAT_THEME Coldark-Dark
 set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
+set -x WARP_ENABLE_WAYLAND 1 # warp-terminal
 
 # Rust
 if test -d ~/.cargo/bin
@@ -257,13 +258,13 @@ set -x WINEARCH win32
 function fb2k
     set -xl LANG 'ja_JP.utf8'
     set -xl WINEPREFIX "$HOME/WindowsApps/foobar2000"
-    env LANG=ja_JP.utf8 wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
+    wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
-function celeste
+function mahjong
     set -xl LANG 'ja_JP.utf8'
-    set -xl WINEPREFIX "$HOME/Games/Celeste"
-    env LANG=ja_JP.utf8 wine "C:\\Program Files\\Celeste\\Celeste.exe"
+    set -xl WINEPREFIX "$HOME/Games/MaruJan"
+    wine "C:\\Users\\alex\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
 end
 
 function ffmd
