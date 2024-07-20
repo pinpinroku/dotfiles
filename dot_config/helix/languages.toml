@@ -8,7 +8,13 @@ language-servers = ["pyright", "ruff"]
 auto-format = true
 
 [language-server.ruff]
-command = "ruff-lsp"
+command = "ruff"
+args = ["server"]
 
 [language-server.ruff.config.settings]
-args = ["--ignore", "E501,ANN101,ANN102,D203,D213", "--extend-select", "UP,ANN,ASYNC,I,N,C4,D"]
+lineLength = 79
+
+[language-server.ruff.config.settings.lint]
+extendSelect = ["UP", "ANN", "ASYNC", "I", "N", "C4", "D"]
+ignore = ["E501", "ANN101", "ANN102", "D203", "D213"]
+preview = false  # unstable rules and fixes
