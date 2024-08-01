@@ -11,10 +11,15 @@ size = 18.0
 
 [font.normal]
 # family = "JetBrainsMono Nerd Font"
-family = "Firge Nerd Console"
+# family = "FirgeNerd Console"
+# family = "Moralerspace Argon NF"
+# family = "Moralerspace Neon NF"
+# family = "Moralerspace Xenon NF"
+# family = "Moralerspace Krypton NF"
+family = "Moralerspace Radon NF"
 
 [window]
-opacity = 0.7
+opacity = 0.5
 blur = false
 decorations = "None"
 startup_mode = "Maximized"

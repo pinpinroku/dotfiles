@@ -1,13 +1,14 @@
-# theme = "kanagawa"
-theme = "catppuccin_macchiato"
-# theme = "rose_pine"
+# theme = "kanagawa-dragon"
+# theme = "catppuccin_mocha"
+theme = "nightfox"
+# theme = "nord"
 
 [editor]
 mouse = false
 line-number = "relative"
 gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
 true-color = true
-cursorline = true
+cursorline = false
 undercurl = true
 auto-save = true
 bufferline = "multiple"

@@ -194,9 +194,9 @@ alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
 alias code 'code --ozone-platform=wayland --wayland-ime'
 
-# Run tvdl
-if test -d ~/repos/tvdl
-    alias tvdl-cli 'poetry run -C ~/repos/tvdl/ -vv -- tvdl'
+# Run the downloader for TVer
+if test -d ~/repos/apicall
+    alias tver 'poetry run -C ~/repos/apicall/ -vv -- caller'
 end
 
 # Run yt-dlp with the specified profile
@@ -222,7 +222,6 @@ set -x VISUAL /usr/bin/helix
 set -x BAT_THEME Coldark-Dark
 set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
-set -x WARP_ENABLE_WAYLAND 1 # warp-terminal
 
 # Rust
 if test -d ~/.cargo/bin
@@ -256,15 +255,15 @@ end
 set -x WINEARCH win32
 
 function fb2k
-    set -xl LANG 'ja_JP.utf8'
+    set -xl LANG 'ja_JP.UTF-8'
     set -xl WINEPREFIX "$HOME/WindowsApps/foobar2000"
     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
 function mahjong
-    set -xl LANG 'ja_JP.utf8'
+    set -xl LANG 'ja_JP.UTF-8'
     set -xl WINEPREFIX "$HOME/Games/MaruJan"
-    wine "C:\\Users\\alex\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
+    wine "C:\\Users\\$USER\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
 end
 
 function ffmd
@@ -284,4 +283,15 @@ function ffmd
     else
         echo "Operation cancelled"
     end
+end
+
+# Search and find the exact font name
+function fc-fd
+    if test (count $argv) -ne 1
+        echo "Please provide a single font name to search for, like 'JetBrains' or 'Fira'."
+        return 1
+    end
+
+    set -l font_name $argv[1]
+    fc-list | grep -i "$font_name" | fzf | cut -d':' -f2 | string trim --left
 end
