@@ -19,7 +19,7 @@ size = 18.0
 family = "Moralerspace Radon NF"
 
 [window]
-opacity = 0.5
+opacity = 0.6
 blur = false
 decorations = "None"
 startup_mode = "Maximized"

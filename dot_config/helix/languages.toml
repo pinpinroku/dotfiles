@@ -18,3 +18,7 @@ lineLength = 79
 extendSelect = ["UP", "ANN", "ASYNC", "I", "N", "C4", "D"]
 ignore = ["E501", "ANN101", "ANN102", "D203", "D213"]
 preview = false  # unstable rules and fixes
+
+[language-server.pyright.config.python.alalysis]
+autoSearchPaths = true
+typeCheckingMode = "strict"
