@@ -1,6 +1,6 @@
-# theme = "kanagawa-dragon"
-# theme = "catppuccin_mocha"
-theme = "nightfox"
+# theme = "kanagawa"
+theme = "catppuccin_macchiato"
+# theme = "nightfox"
 # theme = "nord"
 
 [editor]
@@ -37,6 +37,7 @@ t = ":run-shell-command cargo test"
 
 [keys.normal."minus"]
 r = ":run-shell-command poetry run python -m src.main"
+n = ":open ~/Notes/Journal"
 
 [editor.statusline]
 mode.normal = "NORMAL"

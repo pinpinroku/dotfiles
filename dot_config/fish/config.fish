@@ -181,18 +181,20 @@ alias cp 'cp -iv'
 alias mv 'mv -iv'
 alias cl clear
 alias cls clear
-alias note 'helix ~/Sync/note'
-alias list 'helix ~/Documents/input_list.txt'
+alias todo 'helix ~/Notes/todo.md'
+alias note 'cd ~/Notes && helix ~/Notes'
+alias list 'helix /tmp/input_list.txt'
 alias fig 'helix ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
 alias erase 'exiftool -overwrite_original -all= ' # Remove all metadata from an image
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
-alias hz 'hx (fzp)'
 alias zl zellij
 alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
-alias code 'code --ozone-platform=wayland --wayland-ime'
+alias zld 'zellij delete-session'
+alias code 'code --ozone-platform=wayland --enable-wayland-ime'
+alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 
 # Run the downloader for TVer
 if test -d ~/repos/apicall
@@ -222,6 +224,7 @@ set -x VISUAL /usr/bin/helix
 set -x BAT_THEME Coldark-Dark
 set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
+set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 
 # Rust
 if test -d ~/.cargo/bin
@@ -233,10 +236,10 @@ end
 # Python Poetry
 poetry completions fish >~/.config/fish/completions/poetry.fish
 
-# `ya` shell wrapper that provides the ability
+# `yy` shell wrapper that provides the ability
 # to change the current working directory when exiting Yazi
-function ya
-    set tmp (mktemp -t "yazi-cwd.XXXXX")
+function yy
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"
     if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
         cd -- "$cwd"
@@ -285,13 +288,22 @@ function ffmd
     end
 end
 
-# Search and find the exact font name
-function fc-fd
-    if test (count $argv) -ne 1
-        echo "Please provide a single font name to search for, like 'JetBrains' or 'Fira'."
-        return 1
+# Search and find the exact name of the font family
+function fl
+    set -l font_family (fc-list : family | fzf)
+    wl-copy $font_family
+end
+
+# Create or Open Journal
+function memo
+    set -l notePath "$HOME/Notes/Journal"
+    set -l noteFilename "$notePath/note-$(date +%Y-%m-%d).md"
+
+    if not test -f $noteFilename
+        echo "# Notes for $(date +%Y-%m-%d)" >$noteFilename
     end
 
-    set -l font_name $argv[1]
-    fc-list | grep -i "$font_name" | fzf | cut -d':' -f2 | string trim --left
+    cd $notePath
+
+    $EDITOR $noteFilename
 end

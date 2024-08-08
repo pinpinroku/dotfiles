@@ -10,12 +10,6 @@ shell = "fish"
 size = 18.0
 
 [font.normal]
-# family = "JetBrainsMono Nerd Font"
-# family = "FirgeNerd Console"
-# family = "Moralerspace Argon NF"
-# family = "Moralerspace Neon NF"
-# family = "Moralerspace Xenon NF"
-# family = "Moralerspace Krypton NF"
 family = "Moralerspace Radon NF"
 
 [window]
