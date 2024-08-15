@@ -181,8 +181,8 @@ alias cp 'cp -iv'
 alias mv 'mv -iv'
 alias rm 'rm -v'
 alias cl clear
-alias todo 'helix --working-dir ~/Notes/ ~/Notes/todo.md'
-alias notes 'helix --working-dir ~/Notes/'
+alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
+alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
@@ -199,13 +199,13 @@ alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
 
 # Run the downloader for TVer
-if test -d ~/repos/apicall
-    alias tver 'poetry run -C ~/repos/apicall/ -vv -- caller'
+if test -d ~/repo/apicall
+    alias tver 'poetry run -C ~/repo/apicall/ -vv -- caller'
 end
 
 # Show the bus timetable in the terminal
-if test -d ~/repos/bttable
-    alias btt 'poetry run -C ~/repos/bttable/ -vv -- btt'
+if test -d ~/repo/bttable
+    alias btt 'poetry run -C ~/repo/bttable/ -vv -- btt'
 end
 
 # Run yt-dlp with the specified profile
@@ -266,13 +266,13 @@ set -x WINEARCH win32
 
 function fb2k
     set -xl LANG 'ja_JP.UTF-8'
-    set -xl WINEPREFIX "$HOME/WindowsApps/foobar2000"
+    set -xl WINEPREFIX "$HOME/windows/foobar2000"
     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
 function mahjong
     set -xl LANG 'ja_JP.UTF-8'
-    set -xl WINEPREFIX "$HOME/Games/MaruJan"
+    set -xl WINEPREFIX "$HOME/game/marujan"
     wine "C:\\Users\\$USER\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
 end
 
@@ -303,7 +303,7 @@ end
 
 # Create or Open Journal
 function memo
-    set -l notePath "$HOME/Notes/Journal"
+    set -l notePath "$HOME/note/Journal"
     set -l noteFilename "$notePath/note-$(date +%Y-%m-%d).md"
 
     if not test -f $noteFilename
