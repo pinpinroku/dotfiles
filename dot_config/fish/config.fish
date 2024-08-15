@@ -179,14 +179,14 @@ zoxide init fish | source
 ## Aliases ##
 alias cp 'cp -iv'
 alias mv 'mv -iv'
+alias rm 'rm -v'
 alias cl clear
-alias cls clear
-alias todo 'helix ~/Notes/todo.md'
-alias note 'cd ~/Notes && helix ~/Notes'
+alias todo 'helix --working-dir ~/Notes/ ~/Notes/todo.md'
+alias notes 'helix --working-dir ~/Notes/'
 alias list 'helix /tmp/input_list.txt'
-alias fig 'helix ~/.config/fish/config.fish'
+alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
-alias erase 'exiftool -overwrite_original -all= ' # Remove all metadata from an image
+alias erase 'fd -tf -e jpg -e png --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias zl zellij
@@ -195,10 +195,17 @@ alias zls 'zellij list-sessions'
 alias zld 'zellij delete-session'
 alias code 'code --ozone-platform=wayland --enable-wayland-ime'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
+alias mna 'mpv --no-resume-playback --no-audio'
+alias mnv 'mpv --profile=music --no-video'
 
 # Run the downloader for TVer
 if test -d ~/repos/apicall
     alias tver 'poetry run -C ~/repos/apicall/ -vv -- caller'
+end
+
+# Show the bus timetable in the terminal
+if test -d ~/repos/bttable
+    alias btt 'poetry run -C ~/repos/bttable/ -vv -- btt'
 end
 
 # Run yt-dlp with the specified profile
@@ -303,7 +310,5 @@ function memo
         echo "# Notes for $(date +%Y-%m-%d)" >$noteFilename
     end
 
-    cd $notePath
-
-    $EDITOR $noteFilename
+    helix --working-dir $notePath $noteFilename
 end

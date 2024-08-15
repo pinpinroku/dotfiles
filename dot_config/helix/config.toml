@@ -1,7 +1,6 @@
 # theme = "kanagawa"
-theme = "catppuccin_macchiato"
-# theme = "nightfox"
-# theme = "nord"
+# theme = "catppuccin_macchiato"
+theme = "nightfox"
 
 [editor]
 mouse = false
