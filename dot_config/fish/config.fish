@@ -41,11 +41,6 @@ if status --is-interactive
     source ("/usr/bin/starship" init fish --print-full-init | psub)
 end
 
-
-## Advanced command-not-found hook
-# source /usr/share/doc/find-the-command/ftc.fish
-
-
 ## Functions
 # Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
 function __history_previous_command
@@ -170,6 +165,8 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 if status --is-interactive && type -q fastfetch
     if test $TERM = xterm-256color
         fastfetch --load-config dr460nized
+    else if test $TERM = alacritty
+        fastfetch --logo arch
     end
 end
 
@@ -311,4 +308,18 @@ function memo
     end
 
     helix --working-dir $notePath $noteFilename
+end
+
+# Init new repo
+function newrepo
+    set -l repo_dir "$HOME/repo"
+    cd $repo_dir
+    poetry new $argv
+    cd $argv
+    cp ~/Templates/git-ignore/python_gitignore .gitignore
+end
+
+# Load wiki function
+if test -f ~/script/wiki.fish
+    source ~/script/wiki.fish
 end
