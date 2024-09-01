@@ -190,7 +190,6 @@ alias zl zellij
 alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
 alias zld 'zellij delete-session'
-alias code 'code --ozone-platform=wayland --enable-wayland-ime'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
@@ -261,9 +260,16 @@ end
 ## Wine settings and aliases ##
 set -x WINEARCH win32
 
+# function fb2k
+#     set -xl LANG 'ja_JP.UTF-8'
+#     set -xl WINEPREFIX "$HOME/windows/foobar2000"
+#     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
+# end
+
 function fb2k
+    set -xl WINEARCH win64
     set -xl LANG 'ja_JP.UTF-8'
-    set -xl WINEPREFIX "$HOME/windows/foobar2000"
+    set -xl WINEPREFIX "$HOME/windows/foobar2000-x64_v2.1.5"
     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
@@ -323,3 +329,6 @@ end
 if test -f ~/script/wiki.fish
     source ~/script/wiki.fish
 end
+
+# Debug XWayland
+alias xwdbg 'qdbus6 org.kde.KWin /KWin org.kde.KWin.showDebugConsole'
