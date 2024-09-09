@@ -16,8 +16,8 @@ config.initial_rows = 28
 -- config.front_end = "WebGpu"
 -- config.webgpu_power_preference = "HighPerformance"
 
-config.window_background_opacity = 0.9
-config.text_background_opacity = 0.4
+config.window_background_opacity = 1.0
+config.text_background_opacity = 1.0
 
 -- Appearance
 config.color_scheme = "kanagawabones"
@@ -30,9 +30,7 @@ config.window_padding = {
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	{ family = "JetBrainsMono Nerd Font", scale = 1.2, italic = true },
-	{ family = "Mononoki Nerd Font", scale = 1.2, italic = true },
-	{ family = "IBM Plex Sans JP", scale = 1.2 },
+	{ family = "Moralerspace Radon NF", scale = 1.0, italic = false },
 })
 config.font_size = 18
 config.window_decorations = "RESIZE"

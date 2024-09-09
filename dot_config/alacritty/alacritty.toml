@@ -13,12 +13,13 @@ shell = "fish"
 size = 18.0
 
 [font.normal]
-family = "Moralerspace Radon NF"
+# family = "Moralerspace Radon NF"
+family = "Moralerspace Radon HWNF"
 
 [window]
-opacity = 0.75
+opacity = 0.85
 blur = false
-dimensions = { columns = 179, lines = 47 }
+dimensions = { columns = 194, lines = 48 }
 padding = { x = 4, y = 0 }
 dynamic_padding = true
 decorations = "None"  # None | Full

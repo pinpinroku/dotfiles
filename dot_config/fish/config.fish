@@ -163,11 +163,12 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    if test $TERM = xterm-256color
-        fastfetch --load-config dr460nized
-    else if test $TERM = alacritty
-        fastfetch --logo arch
-    end
+    fastfetch --logo arch
+    # if test $TERM = xterm-256color
+    #     fastfetch --load-config dr460nized
+    # else if test $TERM = alacritty
+    #     fastfetch --logo arch
+    # end
 end
 
 ### Personal configuration ###
@@ -260,12 +261,6 @@ end
 ## Wine settings and aliases ##
 set -x WINEARCH win32
 
-# function fb2k
-#     set -xl LANG 'ja_JP.UTF-8'
-#     set -xl WINEPREFIX "$HOME/windows/foobar2000"
-#     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
-# end
-
 function fb2k
     set -xl WINEARCH win64
     set -xl LANG 'ja_JP.UTF-8'
@@ -283,16 +278,19 @@ function ffmd
     read -P "Enter title: " title
     read -P "Enter artist(s): " artist
     read -P "Enter destination: " dest
+    echo ""
 
-    echo "Please confirm the details:"
     echo "Title: $title"
-    echo "Artist: $artist"
+    echo "Artist(s): $artist"
     echo "Destination: $dest"
 
-    read -P "\nOverwrite metadata with these values? [Y/n] " confirm
+    echo ""
+    read -P "Write metadata with these values? [Y/n] " confirm
+    echo ""
 
     if test "$confirm" = Y -o "$confirm" = y
-        ffmpeg -i $argv -map_metadata -1 -metadata title="$title" -metadata artist="$artist" -c copy "$dest"
+        ffmpeg -hide_banner -i $argv -map_metadata -1 -metadata title="$title" -metadata artist="$artist" -c copy "$dest"
+        mv $argv "$argv.bak"
     else
         echo "Operation cancelled"
     end
