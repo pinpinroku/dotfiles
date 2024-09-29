@@ -1,8 +1,9 @@
 import = [ 
-  "themes/themes/kanagawa_dragon.toml",
-  "themes/themes/nightfox",
-  "themes/themes/night_owl",
-  "themes/themes/nord",
+  "themes/catppuccin_mocha.toml",
+  # "themes/themes/kanagawa_dragon.toml",
+  # "themes/themes/nightfox",
+  # "themes/themes/night_owl",
+  # "themes/themes/nord",
 ]
 
 live_config_reload = true

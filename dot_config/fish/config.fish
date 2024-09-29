@@ -35,12 +35,6 @@ if test -d ~/Applications/depot_tools
     end
 end
 
-
-## Starship prompt
-if status --is-interactive
-    source ("/usr/bin/starship" init fish --print-full-init | psub)
-end
-
 ## Functions
 # Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang
 function __history_previous_command
@@ -163,22 +157,27 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    fastfetch --logo arch
-    # if test $TERM = xterm-256color
-    #     fastfetch --load-config dr460nized
-    # else if test $TERM = alacritty
-    #     fastfetch --logo arch
-    # end
+    if [ -z "$ZED_TERM" ]
+        fastfetch --logo arch
+    end
 end
 
-### Personal configuration ###
+### Personal Configurations ###
+# Initialize starship prompt
+if status --is-interactive
+    source ("/usr/bin/starship" init fish --print-full-init | psub)
+end
+
+# Initialize zoxide
 zoxide init fish | source
 
 ## Aliases ##
+alias c clear
+alias h history
+alias y yazi
 alias cp 'cp -iv'
 alias mv 'mv -iv'
 alias rm 'rm -v'
-alias cl clear
 alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
@@ -194,15 +193,41 @@ alias zld 'zellij delete-session'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
+alias tube '/usr/bin/freetube --enable-wayland-ime --ignore-gpu-blocklist'
 
+## Alias for systemctl ##
+alias systat 'systemctl status'
+alias systatu 'systemctl status --user'
+alias systop 'systemctl stop'
+alias systopu 'systemctl stop --user'
+alias systart 'systemctl start'
+alias systartu 'systemctl start --user'
+alias sysres 'systemctl restart'
+alias sysresu 'systemctl restart --user'
+alias sysrel 'systemctl reload'
+alias sysrelu 'systemctl reload --user'
+alias sysdmr 'sudo systemctl daemon-reload'
+
+## Alias for pacman ##
+alias pass 'pacman -Ss'
+alias pasi 'pacman -Si'
+alias paqs 'pacman -Qs'
+alias paqi 'pacman -Qi'
+
+## Alias for nmcli ##
+alias ngs 'nmcli general status'
+alias ndshow 'nmcli device show'
+alias ndstat 'nmcli device status'
+alias cons 'nmcli connection show "Wired connection 1"'
+
+## Alias for Network Debugging ##
+alias ntwk 'journalctl -fu NetworkManager.service'
+alias adhm 'journalctl -fu AdGuardHome.service'
+
+## Downloader ##
 # Run the downloader for TVer
 if test -d ~/repo/apicall
     alias tver 'poetry run -C ~/repo/apicall/ -vv -- caller'
-end
-
-# Show the bus timetable in the terminal
-if test -d ~/repo/bttable
-    alias btt 'poetry run -C ~/repo/bttable/ -vv -- btt'
 end
 
 # Run yt-dlp with the specified profile
@@ -210,7 +235,7 @@ function yt
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
 end
 
-## Git aliases ##
+## Alias for git ##
 alias gs 'git status --short --branch'
 alias ga 'git add'
 alias gp 'git push'
@@ -222,26 +247,30 @@ alias gm 'git merge'
 alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
-## Environment variables ##
+## Environment Variables ##
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
 set -x BAT_THEME Coldark-Dark
 set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
-set -x ELECTRON_OZONE_PLATFORM_HINT wayland
+# set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 
-# Rust
+## Zed settings ##
+if test "$ZED_TERM"
+    set -x EDITOR /usr/bin/zeditor --wait
+    set -x VISUAL /usr/bin/zeditor --wait
+end
+
+## Rust-Lang ##
+# Add the path of cargo to the $PATH
 if test -d ~/.cargo/bin
     if not contains -- ~/.cargo/bin $PATH
         set -p PATH ~/.cargo/bin
     end
 end
 
-# Python Poetry
-poetry completions fish >~/.config/fish/completions/poetry.fish
-
-# `yy` shell wrapper that provides the ability
-# to change the current working directory when exiting Yazi
+## File Manager ##
+# `yy` shell wrapper that provides the ability to change the current working directory when exiting Yazi
 function yy
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"
@@ -251,7 +280,7 @@ function yy
     rm -f -- "$tmp"
 end
 
-## Music utils ##
+## Music Utils ##
 function play-random-album
     set -l playlist '/tmp/random_album.m3u8'
     fd . -td --min-depth 3 -a ~/Music | shuf >$playlist
@@ -274,6 +303,8 @@ function mahjong
     wine "C:\\Users\\$USER\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
 end
 
+## Video Utils ##
+# Edit metadata of the video using ffmpeg interactively
 function ffmd
     read -P "Enter title: " title
     read -P "Enter artist(s): " artist
@@ -296,12 +327,14 @@ function ffmd
     end
 end
 
+## Font Management ##
 # Search and find the exact name of the font family
 function fl
     set -l font_family (fc-list : family | fzf)
     wl-copy $font_family
 end
 
+## Note Taking ##
 # Create or Open Journal
 function memo
     set -l notePath "$HOME/note/Journal"
@@ -314,7 +347,12 @@ function memo
     helix --working-dir $notePath $noteFilename
 end
 
-# Init new repo
+## Python ##
+
+# Add the poetry completion to the fish shell
+poetry completions fish >~/.config/fish/completions/poetry.fish
+
+# Init new repo with poetry 
 function newrepo
     set -l repo_dir "$HOME/repo"
     cd $repo_dir
@@ -323,10 +361,32 @@ function newrepo
     cp ~/Templates/git-ignore/python_gitignore .gitignore
 end
 
+# Initi new repo with rye
+function initrepo --argument repo_name
+    cd "$HOME/repo/"
+    rye init $repo_name
+    cd $repo_name
+    rye add --dev basedpyright
+    rye sync
+    ls
+end
+
+# Activate virtual environment for rye
+alias activate '. .venv/bin/activate.fish'
+
+set -x RYE_ACTIVATE 0
+function venv
+    if [ "$RYE_ACTIVATE" = 0 ]
+        source .venv/bin/activate.fish
+        set -x RYE_ACTIVATE 1
+    else
+        deactivate
+        set -x RYE_ACTIVATE 0
+    end
+end
+
+## External Functions ##
 # Load wiki function
 if test -f ~/script/wiki.fish
     source ~/script/wiki.fish
 end
-
-# Debug XWayland
-alias xwdbg 'qdbus6 org.kde.KWin /KWin org.kde.KWin.showDebugConsole'

@@ -4,7 +4,6 @@
 	name = pinpinroku
 	email = pinpinroku11600@tutanota.com
 [core]
-	editor = /usr/bin/helix
 	pager = delta
 [commit]
 	template = ~/.gitmessage
@@ -25,10 +24,8 @@
 [merge]
 	conflictstyle = diff3
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [push]
 	autoSetupRemote = true
