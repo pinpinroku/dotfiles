@@ -1,9 +1,8 @@
 [general]  ### Since alacritty 0.14.0-dev (60677877) ### See <https://github.com/alacritty/alacritty/commit/51089cfeed1adfd741d8dcbe6c9cb9376f88a576> ###
 import = [ 
-  "themes/catppuccin_mocha.toml",
-  # "themes/themes/kanagawa_dragon.toml",
+  "synthwave_84.toml",
+  # "themes/catppuccin_mocha.toml",
   # "themes/themes/nightfox",
-  # "themes/themes/night_owl",
   # "themes/themes/nord",
 ]
 
@@ -13,19 +12,18 @@ live_config_reload = true
 shell = "fish"
 
 [font]
-size = 18.0
+size = 16.0
 
 [font.normal]
-# family = "Moralerspace Radon NF"
-family = "Moralerspace Radon HWNF"
+# family = "Cascadia Next JP"
+family = "Moralerspace Neon HWNF"
 
 [window]
-opacity = 0.85
-blur = false
-dimensions = { columns = 194, lines = 48 }
-padding = { x = 4, y = 0 }
+# opacity = 0.85
+# blur = true
+dimensions = { columns = 162, lines = 40 }
 dynamic_padding = true
-decorations = "None"  # None | Full
+# decorations = "None"  # None | Full
 startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [selection]
@@ -33,7 +31,7 @@ save_to_clipboard = true
 
 [cursor]
 blink_timeout = 15
-thickness = 0.2
+thickness = 0.3
 unfocused_hollow = false
 
 [cursor.style]
@@ -45,7 +43,7 @@ shape = "Block"
 blinking = "Off"
 
 [colors]
-transparent_background_colors = true
+transparent_background_colors = false
 
 [mouse]
 hide_when_typing = true

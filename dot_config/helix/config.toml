@@ -1,4 +1,4 @@
-theme = "catppuccin_mocha"
+theme = "nightfox"
 
 [editor]
 mouse = false
@@ -27,14 +27,11 @@ space = { "/" = "toggle_comments", "g" = "global_search", x = ":buffer-close" }
 i = ["collapse_selection", "insert_mode"]
 a = ["move_char_right", "collapse_selection", "insert_mode"]
 
-[keys.normal."+"]
-b = ":run-shell-command cargo build"
-r = ":run-shell-command cargo run"
-t = ":run-shell-command cargo test"
-
 [keys.normal."minus"]
-r = ":run-shell-command poetry run python -m src.main"
-n = ":open ~/Notes/Journal"
+b = ":run-shell-command cargo build -q"
+r = ":run-shell-command cargo run -q"
+t = ":run-shell-command cargo test -q"
+c = ":run-shell-command cargo clippy"
 
 [editor.statusline]
 mode.normal = "NORMAL"

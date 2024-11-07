@@ -157,16 +157,22 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    if [ -z "$ZED_TERM" ]
+    if test "$TERM" = xterm-256color
         fastfetch --logo arch
+    end
+end
+
+## Run pokemon-colorscripts if session is interactive,
+## and if $ZELLIJ is defined
+if status --is-interactive && type -q pokemon-colorscripts
+    if set -q ZELLIJ || test "$TERM" = alacritty
+        pokemon-colorscripts -r 1
     end
 end
 
 ### Personal Configurations ###
 # Initialize starship prompt
-if status --is-interactive
-    source ("/usr/bin/starship" init fish --print-full-init | psub)
-end
+# starship init fish | source
 
 # Initialize zoxide
 zoxide init fish | source
@@ -193,6 +199,7 @@ alias zld 'zellij delete-session'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
+alias code '/usr/bin/codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland --enable-wayland-ime %F'
 alias tube '/usr/bin/freetube --enable-wayland-ime --ignore-gpu-blocklist'
 
 ## Alias for systemctl ##
@@ -224,11 +231,13 @@ alias cons 'nmcli connection show "Wired connection 1"'
 alias ntwk 'journalctl -fu NetworkManager.service'
 alias adhm 'journalctl -fu AdGuardHome.service'
 
+## Alias for Journalctl ##
+alias jf 'journalctl -f'
+alias jeb 'journalctl -eb'
+
 ## Downloader ##
 # Run the downloader for TVer
-if test -d ~/repo/apicall
-    alias tver 'poetry run -C ~/repo/apicall/ -vv -- caller'
-end
+alias tvdl 'tver-dl | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
 
 # Run yt-dlp with the specified profile
 function yt
@@ -250,9 +259,9 @@ alias gl 'git log --graph --oneline --decorate --all'
 ## Environment Variables ##
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
-set -x BAT_THEME Coldark-Dark
+set -x BAT_THEME 'Catppuccin Mocha'
 set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
-set -x FZF_DEFAULT_OPTS '--ansi --reverse'
+# set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 # set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 
 ## Zed settings ##
@@ -293,7 +302,7 @@ set -x WINEARCH win32
 function fb2k
     set -xl WINEARCH win64
     set -xl LANG 'ja_JP.UTF-8'
-    set -xl WINEPREFIX "$HOME/windows/foobar2000-x64_v2.1.5"
+    set -xl WINEPREFIX "$HOME/windows/foobar2000-x64_v2.1.6"
     wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
 end
 
