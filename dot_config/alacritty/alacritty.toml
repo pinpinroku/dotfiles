@@ -20,7 +20,7 @@ family = "Moralerspace Neon HWNF"
 
 [window]
 # opacity = 0.85
-# blur = true
+blur = false
 dimensions = { columns = 162, lines = 40 }
 dynamic_padding = true
 # decorations = "None"  # None | Full
@@ -43,7 +43,7 @@ shape = "Block"
 blinking = "Off"
 
 [colors]
-transparent_background_colors = false
+transparent_background_colors = true
 
 [mouse]
 hide_when_typing = true

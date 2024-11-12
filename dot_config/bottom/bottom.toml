@@ -141,6 +141,7 @@ whole_word = false
 # or overridden if the command-line flag for a built-in theme is set.
 #theme = "default"
 
+### Catppuccin Mocha ###
 [styles.tables]
 headers = {color = "#f5e0dc"}
 [styles.cpu]

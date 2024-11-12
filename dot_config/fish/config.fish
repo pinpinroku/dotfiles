@@ -190,16 +190,16 @@ alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
 alias erase 'fd -tf -e jpg -e png --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
-alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp'
+alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias zl zellij
 alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
 alias zld 'zellij delete-session'
+alias zlk 'zellij kill-session'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
-alias code '/usr/bin/codium --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=wayland --enable-wayland-ime %F'
 alias tube '/usr/bin/freetube --enable-wayland-ime --ignore-gpu-blocklist'
 
 ## Alias for systemctl ##
@@ -260,7 +260,7 @@ alias gl 'git log --graph --oneline --decorate --all'
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
 set -x BAT_THEME 'Catppuccin Mocha'
-set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
+# set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
 # set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 # set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 

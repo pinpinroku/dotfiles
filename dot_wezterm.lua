@@ -6,13 +6,13 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.default_prog = { "fish" }
+config.default_prog = { "bash" }
 config.launch_menu = {
 	{ label = "Bottom", args = { "btm" } },
 }
 
-config.initial_cols = 105
-config.initial_rows = 28
+config.initial_cols = 162
+config.initial_rows = 40
 -- config.front_end = "WebGpu"
 -- config.webgpu_power_preference = "HighPerformance"
 
@@ -20,7 +20,9 @@ config.window_background_opacity = 1.0
 config.text_background_opacity = 1.0
 
 -- Appearance
-config.color_scheme = "kanagawabones"
+-- config.color_scheme = "kanagawabones"
+config.color_scheme = 'OceanicNext (base16)'
+-- config.color_scheme = 'synthwave-everything'
 config.window_padding = {
 	top = 0,
 	bottom = 0,
@@ -30,10 +32,10 @@ config.window_padding = {
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	{ family = "Moralerspace Radon NF", scale = 1.0, italic = false },
+	{ family = "Moralerspace Argon HWNF", scale = 1.0, italic = false },
 })
-config.font_size = 18
-config.window_decorations = "RESIZE"
+config.font_size = 16
+-- config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 
