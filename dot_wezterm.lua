@@ -13,11 +13,11 @@ config.launch_menu = {
 
 config.initial_cols = 162
 config.initial_rows = 40
--- config.front_end = "WebGpu"
--- config.webgpu_power_preference = "HighPerformance"
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
 
-config.window_background_opacity = 1.0
-config.text_background_opacity = 1.0
+config.window_background_opacity = 0.85
+config.text_background_opacity = 0.4
 
 -- Appearance
 -- config.color_scheme = "kanagawabones"
@@ -32,7 +32,7 @@ config.window_padding = {
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	{ family = "Moralerspace Argon HWNF", scale = 1.0, italic = false },
+	{ family = "Moralerspace Argon HWNF", scale = 1.2, italic = false },
 })
 config.font_size = 16
 -- config.window_decorations = "RESIZE"
@@ -41,7 +41,7 @@ config.tab_bar_at_bottom = true
 
 -- Behaviour
 config.audible_bell = "Disabled"
--- config.animation_fps = 30
+config.animation_fps = 60
 
 -- Leader
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }

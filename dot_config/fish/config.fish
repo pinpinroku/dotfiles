@@ -93,15 +93,16 @@ function cleanup
     end
 end
 
-## Useful aliases
+## Useful aliases ##
 
 # Replace ls with eza
-alias l 'eza --color=always --group-directories-first --icons'
-alias ls 'eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la 'eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll 'eza -l --color=always --group-directories-first --icons' # long format
-alias lt 'eza -aT --color=always --group-directories-first --icons' # tree listing
-alias l. 'eza -ald --color=always --group-directories-first --icons .*' # show only dotfiles
+alias l 'eza --color=always --group-directories-first --icons --no-quotes --sort Name'
+alias ls 'exa -al --color=always --group-directories-first --icons --sort Name --color-scale size --color-scale-mode gradient --no-quotes ' # preferred listing
+alias la 'exa -a --color=always --group-directories-first --icons --sort Name' # all files and dirs
+alias ll 'exa -l --color=always --group-directories-first --icons --sort Name --color-scale size --color-scale-mode gradient --no-quotes ' # long format
+alias lt 'exa -aT --color=always --group-directories-first --icons --no-quotes --sort Name' # tree listing
+alias l. 'exa -ald --color=always --group-directories-first --icons .* --no-quotes --sort Name' # show only dotfiles
+
 
 # Replace some more things with better alternatives
 alias cat 'bat --style header --style snip --style changes --style header'
@@ -157,22 +158,13 @@ alias rip 'expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
 
 ## Run fastfetch if session is interactive
 if status --is-interactive && type -q fastfetch
-    if test "$TERM" = xterm-256color
-        fastfetch --logo arch
-    end
-end
-
-## Run pokemon-colorscripts if session is interactive,
-## and if $ZELLIJ is defined
-if status --is-interactive && type -q pokemon-colorscripts
-    if set -q ZELLIJ || test "$TERM" = alacritty
-        pokemon-colorscripts -r 1
-    end
+    fastfetch --logo arch
 end
 
 ### Personal Configurations ###
 # Initialize starship prompt
-# starship init fish | source
+starship init fish | source
+set -x STARSHIP_CONFIG = '~/.config/alacritty/starship.toml'
 
 # Initialize zoxide
 zoxide init fish | source
@@ -189,20 +181,23 @@ alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
-alias erase 'fd -tf -e jpg -e png --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
+alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
+alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
+
+## mpv ##
+alias mna 'mpv --no-resume-playback --no-audio'
+alias mnv 'mpv --profile=music --no-video'
+
+## Zellij ##
 alias zl zellij
 alias zla 'zellij attach'
 alias zls 'zellij list-sessions'
 alias zld 'zellij delete-session'
 alias zlk 'zellij kill-session'
-alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
-alias mna 'mpv --no-resume-playback --no-audio'
-alias mnv 'mpv --profile=music --no-video'
-alias tube '/usr/bin/freetube --enable-wayland-ime --ignore-gpu-blocklist'
 
-## Alias for systemctl ##
+## systemctl ##
 alias systat 'systemctl status'
 alias systatu 'systemctl status --user'
 alias systop 'systemctl stop'
@@ -215,36 +210,36 @@ alias sysrel 'systemctl reload'
 alias sysrelu 'systemctl reload --user'
 alias sysdmr 'sudo systemctl daemon-reload'
 
-## Alias for pacman ##
+## pacman ##
 alias pass 'pacman -Ss'
 alias pasi 'pacman -Si'
 alias paqs 'pacman -Qs'
 alias paqi 'pacman -Qi'
 
-## Alias for nmcli ##
+## NetworkManager ##
 alias ngs 'nmcli general status'
 alias ndshow 'nmcli device show'
 alias ndstat 'nmcli device status'
 alias cons 'nmcli connection show "Wired connection 1"'
 
-## Alias for Network Debugging ##
+## Network Debugging ##
 alias ntwk 'journalctl -fu NetworkManager.service'
 alias adhm 'journalctl -fu AdGuardHome.service'
 
-## Alias for Journalctl ##
+## Journal ##
 alias jf 'journalctl -f'
 alias jeb 'journalctl -eb'
 
 ## Downloader ##
 # Run the downloader for TVer
-alias tvdl 'tver-dl | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
+alias tvdl 'tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
 
 # Run yt-dlp with the specified profile
 function yt
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
 end
 
-## Alias for git ##
+## git ##
 alias gs 'git status --short --branch'
 alias ga 'git add'
 alias gp 'git push'
@@ -260,15 +255,9 @@ alias gl 'git log --graph --oneline --decorate --all'
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
 set -x BAT_THEME 'Catppuccin Mocha'
-# set -x FZF_DEFAULT_COMMAND 'fd --type file --color=always'
-# set -x FZF_DEFAULT_OPTS '--ansi --reverse'
+set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
+set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 # set -x ELECTRON_OZONE_PLATFORM_HINT wayland
-
-## Zed settings ##
-if test "$ZED_TERM"
-    set -x EDITOR /usr/bin/zeditor --wait
-    set -x VISUAL /usr/bin/zeditor --wait
-end
 
 ## Rust-Lang ##
 # Add the path of cargo to the $PATH
@@ -312,30 +301,6 @@ function mahjong
     wine "C:\\Users\\$USER\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
 end
 
-## Video Utils ##
-# Edit metadata of the video using ffmpeg interactively
-function ffmd
-    read -P "Enter title: " title
-    read -P "Enter artist(s): " artist
-    read -P "Enter destination: " dest
-    echo ""
-
-    echo "Title: $title"
-    echo "Artist(s): $artist"
-    echo "Destination: $dest"
-
-    echo ""
-    read -P "Write metadata with these values? [Y/n] " confirm
-    echo ""
-
-    if test "$confirm" = Y -o "$confirm" = y
-        ffmpeg -hide_banner -i $argv -map_metadata -1 -metadata title="$title" -metadata artist="$artist" -c copy "$dest"
-        mv $argv "$argv.bak"
-    else
-        echo "Operation cancelled"
-    end
-end
-
 ## Font Management ##
 # Search and find the exact name of the font family
 function fl
@@ -354,48 +319,4 @@ function memo
     end
 
     helix --working-dir $notePath $noteFilename
-end
-
-## Python ##
-
-# Add the poetry completion to the fish shell
-poetry completions fish >~/.config/fish/completions/poetry.fish
-
-# Init new repo with poetry 
-function newrepo
-    set -l repo_dir "$HOME/repo"
-    cd $repo_dir
-    poetry new $argv
-    cd $argv
-    cp ~/Templates/git-ignore/python_gitignore .gitignore
-end
-
-# Initi new repo with rye
-function initrepo --argument repo_name
-    cd "$HOME/repo/"
-    rye init $repo_name
-    cd $repo_name
-    rye add --dev basedpyright
-    rye sync
-    ls
-end
-
-# Activate virtual environment for rye
-alias activate '. .venv/bin/activate.fish'
-
-set -x RYE_ACTIVATE 0
-function venv
-    if [ "$RYE_ACTIVATE" = 0 ]
-        source .venv/bin/activate.fish
-        set -x RYE_ACTIVATE 1
-    else
-        deactivate
-        set -x RYE_ACTIVATE 0
-    end
-end
-
-## External Functions ##
-# Load wiki function
-if test -f ~/script/wiki.fish
-    source ~/script/wiki.fish
 end

@@ -1,0 +1,258 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+## I don't know what is this ##
+# PS1='[\u@\h \W]\$ '
+
+# Advanced command-not-found hook
+source /usr/share/doc/find-the-command/ftc.bash
+
+# Enable vi mode
+set -o vi
+
+# Use /usr/bin/bash instead of /bin/bash
+export SHELL='/usr/bin/bash'
+
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+
+# History output format
+HISTTIMEFORMAT="%F %T "
+
+# Ignore duplicate commands in the history
+HISTCONTROL=ignoredups:ignorespace
+
+# Ignore commands that start with sudo -S, password, or token
+HISTIGNORE='*sudo -S*:*password*:*token*'
+
+# Limit the history size
+HISTSIZE=1000
+HISTFILESIZE=1000
+
+# Private directories
+export NOTES_DIR="$HOME/note"
+export WINE_PREFIX_DIR="$HOME/windows"
+export GAMES_DIR="$HOME/game"
+export JOURNAL_DIR="$NOTES_DIR/Journal"
+
+# zoxide
+eval "$(zoxide init bash)"
+
+# starship
+if [ -x /usr/bin/starship ]; then
+	export STARSHIP_CONFIG='~/.config/alacritty/starship.toml'
+	eval "$(starship init bash)"
+fi
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
+## Useful aliases
+
+# Replace ls with exa
+alias l='eza --color=always --group-directories-first --icons --no-quotes --sort Name'
+alias ls='exa -al --color=always --group-directories-first --icons --sort Name --color-scale size --color-scale-mode gradient --no-quotes '     # preferred listing
+alias la='exa -a --color=always --group-directories-first --icons --sort Name'      # all files and dirs
+alias ll='exa -l --color=always --group-directories-first --icons --sort Name --color-scale size --color-scale-mode gradient --no-quotes '      # long format
+alias lt='exa -aT --color=always --group-directories-first --icons --no-quotes --sort Name'     # tree listing
+alias l.='exa -ald --color=always --group-directories-first --icons .* --no-quotes --sort Name' # show only dotfiles
+
+# Replace some more things with better alternatives
+alias cat='bat --style header --style snip --style changes --style header'
+[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
+
+# Common use
+alias grubup="sudo update-grub"
+alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+alias tarnow='tar -acf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias rmpkg="sudo pacman -Rdd"
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias upd='/usr/bin/garuda-update'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='ugrep --color=auto'
+alias fgrep='ugrep -F --color=auto'
+alias egrep='ugrep -E --color=auto'
+alias ip='ip -color'
+
+# Get fastest mirrors
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+
+# Cleanup orphaned packages
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+
+# Get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+# Recent installed packages
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+
+# Rust
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+
+# Editor
+export EDITOR='/usr/bin/helix'
+export VISUAL='/usr/bin/helix'
+
+# bat theme
+export BAT_THEME='Catppuccin Mocha'
+
+# Manual pages
+eval "$(batman --export-env)"
+
+# fzf preference
+export FZF_DEFAULT_OPTS='--ansi'
+export FZF_DEFAULT_COMMAND='fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
+
+# yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# broot
+source "$HOME/.config/broot/launcher/bash/br"
+
+# Grep (search) through your history for previous run commands
+function hg() {
+	history | grep "$1";
+}
+
+## Aliases ##
+alias c='clear'
+alias h='history'
+alias y='yazi'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -v'
+alias mkdir='mkdir -p -v'
+alias todo="helix --working-dir $NOTES_DIR $NOTES_DIR/todo.md"
+alias note="helix --working-dir $NOTES_DIR"
+alias list='helix /tmp/input_list.txt'
+alias fp='ffprobe -hide_banner'
+alias erase='fd -tf -e jpg -e png --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
+alias duf='duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp'
+alias fzp='fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
+alias mine='fd -tf -e mp4 -e mkv --exec chmod -c 600'
+
+## mpv ##
+alias mna='mpv --no-resume-playback --no-audio'
+alias mnv='mpv --profile=music --no-video'
+
+## Zellij ##
+alias zl='zellij'
+alias zla='zellij attach'
+alias zls='zellij list-sessions'
+alias zld='zellij delete-session'
+alias zlk='zellij kill-session'
+
+## pacman ##
+alias pass='pacman -Ss'
+alias pasi='pacman -Si'
+alias paqs='pacman -Qs'
+alias paqi='pacman -Qi'
+
+## NetworkManager ##
+alias ngs='nmcli general status'
+
+## systemctl ##
+alias sctl='systemctl'
+
+## Network Debugging ##
+alias ntwk='journalctl -fu NetworkManager.service'
+alias adhm='journalctl -fu AdGuardHome.service'
+
+## Journalctl ##
+alias jf='journalctl -f'
+alias jeb='journalctl -eb'
+
+## Downloader ##
+# Run the downloader for TVer
+alias tvdl='tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
+
+# Function to run yt-dlp with the specified profile
+yt() {
+	# Check if exactly one argument is provided
+	if [ "$#" -ne 1 ]; then
+		echo "Error: You must specify a profile name."
+		echo "Usage: yt-cfg <profile_name>"
+		return 1
+	fi
+
+	# Construct the config file path
+	local config_file="$HOME/.config/yt-dlp/$1.conf"
+
+	# Check if the config file exists
+	if [ ! -f "$config_file" ]; then
+		echo "Error: Configuration file '$config_file' does not exist."
+		return 1
+	fi
+
+	# Run yt-dlp with the specified config file
+	yt-dlp --config-location "$config_file"
+}
+
+## git ##
+alias gs='git status --short --branch'
+alias ga='git add'
+alias gp='git push'
+alias gr='git remote -v'
+alias gb='git branch -av'
+alias gc='git commit -v'
+alias gd='git diff'
+alias gm='git merge'
+alias gsw='git switch'
+alias gl='git log --graph --oneline --decorate --all'
+
+# Set the WINEARCH to win32 globally
+export WINEARCH=win32
+
+# Function to run foobar2000
+fb2k() {
+    export WINEARCH=win64
+    export LANG='ja_JP.UTF-8'
+    export WINEPREFIX="$WINE_PREFIX_DIR/foobar2000-x64_v2.1.6"
+    wine "C:\\Program Files\\foobar2000\\foobar2000.exe"
+}
+
+# Modified mahjong function
+mahjong() {
+    export LANG='ja_JP.UTF-8'
+    export WINEPREFIX="$GAMES_DIR/marujan"
+    wine "C:\\Users\\$USER\\Documents\\My Mahjong\\Maru-Jan\\MaruJan.exe"
+}
+
+# Function to create or open a journal note
+memo() {
+    local noteFilename="$JOURNAL_DIR/note-$(date +%Y-%m-%d).md"
+
+    # Check if the note file exists
+    if [ ! -f "$noteFilename" ]; then
+        echo "# Notes for $(date +%Y-%m-%d)" > "$noteFilename"
+    fi
+
+    # Open the note file with Helix
+    helix --working-dir "$JOURNAL_DIR" "$noteFilename"
+}
+
+fastfetch --logo arch

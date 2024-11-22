@@ -1,5 +1,4 @@
-# theme = "nightfox"
-theme = "base16_transparent"
+theme = "nightfox"
 
 [editor]
 mouse = false
