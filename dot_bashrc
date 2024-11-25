@@ -38,7 +38,7 @@ HISTFILESIZE=1000
 export NOTES_DIR="$HOME/note"
 export WINE_PREFIX_DIR="$HOME/windows"
 export GAMES_DIR="$HOME/game"
-export JOURNAL_DIR="$NOTES_DIR/Journal"
+export JOURNAL_DIR="$HOME/journal"
 
 # zoxide
 eval "$(zoxide init bash)"

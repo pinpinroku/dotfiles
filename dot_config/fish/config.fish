@@ -28,6 +28,13 @@ if test -d ~/.local/bin
     end
 end
 
+# Add ~/.bun/bin/ to PATH
+if test -d ~/.bun/bin
+    if not contains -- ~/.bun/bin $PATH
+        set -p PATH ~/.bun/bin
+    end
+end
+
 # Add depot_tools to PATH
 if test -d ~/Applications/depot_tools
     if not contains -- ~/Applications/depot_tools $PATH
@@ -311,7 +318,7 @@ end
 ## Note Taking ##
 # Create or Open Journal
 function memo
-    set -l notePath "$HOME/note/Journal"
+    set -l notePath "$HOME/journal"
     set -l noteFilename "$notePath/note-$(date +%Y-%m-%d).md"
 
     if not test -f $noteFilename
@@ -320,3 +327,7 @@ function memo
 
     helix --working-dir $notePath $noteFilename
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
