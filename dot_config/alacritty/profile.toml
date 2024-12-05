@@ -1,4 +1,4 @@
-[general]  ### Since alacritty 0.14.0-dev (60677877) ### See <https://github.com/alacritty/alacritty/commit/51089cfeed1adfd741d8dcbe6c9cb9376f88a576> ###
+[general]
 import = [ 
   "synthwave_84.toml",
   # "themes/catppuccin_mocha.toml",
@@ -8,7 +8,7 @@ import = [
 
 live_config_reload = true
 
-[terminal] ### Since alacritty 0.14.0-dev (60677877) ### See <https://github.com/alacritty/alacritty/commit/51089cfeed1adfd741d8dcbe6c9cb9376f88a576> ###
+[terminal]
 shell = "fish"
 
 [font]
