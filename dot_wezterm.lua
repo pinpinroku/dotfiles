@@ -13,15 +13,15 @@ config.launch_menu = {
 
 config.initial_cols = 162
 config.initial_rows = 40
-config.front_end = "WebGpu"
-config.webgpu_power_preference = "HighPerformance"
+-- config.front_end = "WebGpu"
+-- config.webgpu_power_preference = "HighPerformance"
 
 config.window_background_opacity = 0.85
 config.text_background_opacity = 0.4
 
 -- Appearance
--- config.color_scheme = "kanagawabones"
-config.color_scheme = 'OceanicNext (base16)'
+config.color_scheme = "kanagawabones"
+-- config.color_scheme = 'OceanicNext (base16)'
 -- config.color_scheme = 'synthwave-everything'
 config.window_padding = {
 	top = 0,
@@ -29,15 +29,15 @@ config.window_padding = {
 	right = 0,
 	left = 0,
 }
+config.window_decorations = "RESIZE"
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
 
 -- Font
 config.font = wezterm.font_with_fallback({
-	{ family = "Moralerspace Argon HWNF", scale = 1.2, italic = false },
+	{ family = "Moralerspace Argon HWNF", scale = 1.0, italic = false },
 })
 config.font_size = 16
--- config.window_decorations = "RESIZE"
-config.hide_tab_bar_if_only_one_tab = true
-config.tab_bar_at_bottom = true
 
 -- Behaviour
 config.audible_bell = "Disabled"

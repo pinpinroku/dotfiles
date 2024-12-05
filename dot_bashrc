@@ -255,4 +255,4 @@ memo() {
     helix --working-dir "$JOURNAL_DIR" "$noteFilename"
 }
 
-fastfetch --logo arch
+fastfetch --load-config dr460nized

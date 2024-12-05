@@ -19,7 +19,7 @@ size = 16.0
 family = "Moralerspace Neon HWNF"
 
 [window]
-opacity = 0.75
+opacity = 0.85
 blur = true
 # dimensions = { columns = 162, lines = 40 }
 dynamic_padding = true
