@@ -6,7 +6,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.default_prog = { "bash" }
+config.default_prog = { "fish" }
 config.launch_menu = {
 	{ label = "Bottom", args = { "btm" } },
 }
