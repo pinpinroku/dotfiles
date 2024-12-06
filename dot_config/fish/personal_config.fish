@@ -150,7 +150,7 @@ end
 
 if status --is-interactive && type -q fastfetch
     if test $TERM = alacritty
-        fastfetch --config neofetch.jsonc
+        fastfetch --logo arch
     else
         fastfetch --load-config dr460nized
     end

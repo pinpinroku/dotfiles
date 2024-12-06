@@ -1,9 +1,7 @@
 [general]
 import = [ 
-  "synthwave_84.toml",
-  # "themes/catppuccin_mocha.toml",
-  # "themes/themes/nightfox",
-  # "themes/themes/nord",
+  # "themes/themes/synthwave_84.toml",
+  "themes/themes/nord.toml",
 ]
 
 live_config_reload = true
@@ -15,24 +13,23 @@ shell = "fish"
 size = 16.0
 
 [font.normal]
-# family = "Cascadia Next JP"
 family = "Moralerspace Neon HWNF"
 
 [window]
-opacity = 0.85
-blur = true
-# dimensions = { columns = 162, lines = 40 }
+opacity = 0.8
+blur = false
+dimensions = { columns = 130, lines = 30 }
 dynamic_padding = true
-decorations = "None"  # None | Full
-startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
+decorations = "full"  # None | Full
+startup_mode = "windowed"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [selection]
 save_to_clipboard = true
 
 [cursor]
 blink_timeout = 15
-thickness = 0.3
-unfocused_hollow = false
+thickness = 0.15
+unfocused_hollow = true
 
 [cursor.style]
 shape = "Beam"
@@ -41,9 +38,6 @@ blinking = "On"
 [cursor.vi_mode_style]
 shape = "Block"
 blinking = "Off"
-
-[colors]
-transparent_background_colors = true
 
 [mouse]
 hide_when_typing = true
