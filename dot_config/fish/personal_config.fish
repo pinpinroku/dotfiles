@@ -1,14 +1,15 @@
 ### Initialization ###
 
-# Initialize starship prompt
-# starship init fish | source
-
-# Initialize zoxide
-zoxide init fish | source
+# Initialize starship prompt and zoxide
+if status --is-interactive
+    starship init fish | source
+    zoxide init fish | source
+end
 
 
 ### Alias ###
 
+alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --no-quotes --sort Name'
 alias e yazi
 alias cl clear
@@ -89,14 +90,14 @@ alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
 alias endeavour "qemu-system-x86_64 -hda $HOME/Documents/vm/endeavouros/endeavouros.img -m 8G -smp 12 -accel kvm -vga virtio"
-alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/cachyos.img -m 8G -smp 12 -accel kvm -vga virtio"
+alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/kdeplasma.img -m 8G -smp 12 -accel kvm -vga virtio"
 
 
 ### Environment Variable ###
 
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
-set -x BAT_THEME 'Catppuccin Mocha'
+# set -x BAT_THEME 'Catppuccin Mocha'
 set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 # set -x ELECTRON_OZONE_PLATFORM_HINT wayland
@@ -108,18 +109,6 @@ if test -d ~/.cargo/bin
         set -p PATH ~/.cargo/bin
     end
 end
-
-## bun ##
-# Add ~/.bun/bin/ to PATH
-if test -d ~/.bun/bin
-    if not contains -- ~/.bun/bin $PATH
-        set -p PATH ~/.bun/bin
-    end
-end
-
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
 
 ### Function ###
 
@@ -157,4 +146,12 @@ function memo
     end
 
     helix --working-dir $notePath $noteFilename
+end
+
+if status --is-interactive && type -q fastfetch
+    if test $TERM = alacritty
+        fastfetch --config neofetch.jsonc
+    else
+        fastfetch --load-config dr460nized
+    end
 end
