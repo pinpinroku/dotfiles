@@ -2,7 +2,13 @@
 
 # Initialize starship prompt and zoxide
 if status --is-interactive
+    # Set vi mode
+    fish_vi_key_bindings
+    set fish_cursor_default block
+    set fish_cursor_insert line
+    # init starship
     starship init fish | source
+    # init zoxide
     zoxide init fish | source
 end
 
@@ -20,7 +26,7 @@ alias mkdir 'mkdir -v'
 alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
-alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
+alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
 alias fp 'ffprobe -hide_banner'
 alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
@@ -30,7 +36,7 @@ alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 ## mpv ##
 alias mna 'mpv --no-resume-playback --no-audio'
 alias mnv 'mpv --profile=music --no-video'
-alias album 'mpv --profile=music (fd . -tf --exclude cover.jpg (fd . -td --color always --min-depth 3 ~/Music | fzf))'
+alias album 'mpv --profile=music (fd . -td --color always --min-depth 3 ~/Music | fzf)'
 
 ## Zellij ##
 alias zl zellij
@@ -89,7 +95,6 @@ alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
-alias endeavour "qemu-system-x86_64 -hda $HOME/Documents/vm/endeavouros/endeavouros.img -m 8G -smp 12 -accel kvm -vga virtio"
 alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/kdeplasma.img -m 8G -smp 12 -accel kvm -vga virtio"
 
 

@@ -1,9 +1,8 @@
 [general]
 import = [ 
-  # "themes/themes/synthwave_84.toml",
   "themes/themes/nord.toml",
+  # "themes/themes/synthwave_84.toml",
 ]
-
 live_config_reload = true
 
 [terminal]
@@ -14,10 +13,10 @@ size = 16.0
 
 [font.normal]
 family = "Moralerspace Neon HWNF"
+style = "Regular"
 
 [window]
 opacity = 0.8
-blur = false
 dimensions = { columns = 130, lines = 30 }
 dynamic_padding = true
 decorations = "full"  # None | Full
