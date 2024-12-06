@@ -23,7 +23,7 @@ alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/config.fish'
 alias fp 'ffprobe -hide_banner'
 alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
-alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi'
+alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
 
