@@ -80,7 +80,9 @@ alias jeb 'journalctl -eb'
 
 ## Downloader ##
 # Run the downloader for TVer
-alias tvdl 'tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
+if test -d ~/.config/tver-dl && type -q tver-dl
+    alias tvdl 'tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
+end
 
 ## git ##
 alias gs 'git status --short --branch'
@@ -160,3 +162,5 @@ if status --is-interactive && type -q fastfetch
         fastfetch --load-config dr460nized
     end
 end
+
+set -x STARSHIP_CONFIG ~/.config/starship/powerline.toml

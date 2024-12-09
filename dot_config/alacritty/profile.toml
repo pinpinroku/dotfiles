@@ -16,8 +16,8 @@ family = "Moralerspace Neon HWNF"
 style = "Regular"
 
 [window]
-opacity = 0.8
-dimensions = { columns = 130, lines = 30 }
+opacity = 0.85
+dimensions = { columns = 150, lines = 38 }
 dynamic_padding = true
 decorations = "full"  # None | Full
 startup_mode = "windowed"  # "Windowed" | "Maximized" | "Fullscreen"

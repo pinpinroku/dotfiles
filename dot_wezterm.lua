@@ -2,33 +2,24 @@ local wezterm = require("wezterm")
 
 local config = {}
 
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
+-- if wezterm.config_builder then
+-- 	config = wezterm.config_builder()
+-- end
 
+config.automatically_reload_config = true
 config.default_prog = { "fish" }
-config.launch_menu = {
-	{ label = "Bottom", args = { "btm" } },
-}
-
+config.default_cursor_style = "BlinkingBar"
 config.initial_cols = 162
 config.initial_rows = 40
 -- config.front_end = "WebGpu"
 -- config.webgpu_power_preference = "HighPerformance"
 
 config.window_background_opacity = 0.85
-config.text_background_opacity = 0.4
+-- config.text_background_opacity = 0.4
 
 -- Appearance
 config.color_scheme = "kanagawabones"
 -- config.color_scheme = 'OceanicNext (base16)'
--- config.color_scheme = 'synthwave-everything'
-config.window_padding = {
-	top = 0,
-	bottom = 0,
-	right = 0,
-	left = 0,
-}
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
@@ -36,6 +27,8 @@ config.tab_bar_at_bottom = true
 -- Font
 config.font = wezterm.font_with_fallback({
 	{ family = "Moralerspace Argon HWNF", scale = 1.0, italic = false },
+	{ family = "Cascadia Next JP", scale = 1.0, italic = false },
+	{ family = "Mononoki Nerd Font", scale = 1.0, italic = false },
 })
 config.font_size = 16
 
@@ -62,20 +55,6 @@ config.keys = {
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{ key = "h", mods = "LEADER", action = wezterm.action.PaneSelect },
-
-	-- Swap keymaps for toggle fullscreen.
-	{
-		-- Press `F11` to toggle fullscreen.
-		key = "F11",
-		mods = "",
-		action = wezterm.action.ToggleFullScreen,
-	},
-	{
-		-- Disable default keymap. This combination used in broot.
-		key = "Enter",
-		mods = "ALT",
-		action = wezterm.action.DisableDefaultAssignment,
-	},
 }
 
 return config
