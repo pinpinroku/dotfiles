@@ -5,38 +5,30 @@ import = [
 ]
 live_config_reload = true
 
-[terminal]
-shell = "fish"
-
-[font]
-size = 16.0
-
-[font.normal]
-family = "Moralerspace Neon HWNF"
-style = "Regular"
-
 [window]
-opacity = 0.85
 dimensions = { columns = 150, lines = 38 }
 dynamic_padding = true
 decorations = "full"  # None | Full
+opacity = 0.85
+blur = false
 startup_mode = "windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+
+[font]
+normal = { family = "Moralerspace Neon HWNF", style = "Regular" }
+size = 16.0
 
 [selection]
 save_to_clipboard = true
 
 [cursor]
+style = { shape = "Beam", blinking = "On" }
+vi_mode_style = { shape = "Block", blinking = "Off" }
 blink_timeout = 15
-thickness = 0.15
-unfocused_hollow = true
+unfocused_hollow = false
+thickness = 0.3
 
-[cursor.style]
-shape = "Beam"
-blinking = "On"
-
-[cursor.vi_mode_style]
-shape = "Block"
-blinking = "Off"
+[terminal]
+shell = { program = "/usr/bin/fish", args = [] }
 
 [mouse]
 hide_when_typing = true

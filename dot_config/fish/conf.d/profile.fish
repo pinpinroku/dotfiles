@@ -57,6 +57,8 @@ alias sysresu 'systemctl restart --user'
 alias sysrel 'systemctl reload'
 alias sysrelu 'systemctl reload --user'
 alias sysdmr 'sudo systemctl daemon-reload'
+alias timers 'systemctl list-timers -a'
+alias unit-files 'systemctl list-unit-files --type=service'
 
 ## pacman ##
 alias pass 'pacman -Ss'
@@ -80,8 +82,12 @@ alias jeb 'journalctl -eb'
 
 ## Downloader ##
 # Run the downloader for TVer
-if test -d ~/.config/tver-dl && type -q tver-dl
-    alias tvdl 'tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf'
+function tvdl
+    if test -d ~/.config/tver-dl
+        if type -q tver-dl
+            tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
+        end
+    end
 end
 
 ## git ##
