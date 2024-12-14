@@ -103,7 +103,9 @@ alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
-alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/kdeplasma.img -m 8G -smp 12 -accel kvm -vga virtio"
+alias garuda "qemu-system-x86_64 -hda $HOME/Documents/vm/garudalinux/garudalinux.img -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
+alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/kdeplasma.img -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
+alias ubuntu "qemu-system-x86_64 -hda $HOME/Documents/vm/ubuntu/ubuntu.img -m 8G -smp 6-accel kvm -vga virtio -full-screen"
 
 
 ### Environment Variable ###

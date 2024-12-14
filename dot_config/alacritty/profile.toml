@@ -7,11 +7,10 @@ live_config_reload = true
 
 [window]
 dimensions = { columns = 150, lines = 38 }
-dynamic_padding = true
-decorations = "full"  # None | Full
-opacity = 0.85
+decorations = "Full"  # None | Full
+opacity = 0.9
 blur = false
-startup_mode = "windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [font]
 normal = { family = "Moralerspace Neon HWNF", style = "Regular" }
