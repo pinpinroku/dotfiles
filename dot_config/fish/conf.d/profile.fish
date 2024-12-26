@@ -16,7 +16,8 @@ end
 ### Alias ###
 
 alias cat 'bat --style header --style snip --style changes --style header'
-alias l 'eza --color=always --group-directories-first --icons --no-quotes --sort Name'
+alias l 'eza --color=always --group-directories-first --icons --sort Name'
+alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
 alias e yazi
 alias cl clear
 alias cp 'cp -iv'
@@ -27,11 +28,13 @@ alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
+alias conf 'helix --working-dir ~/backup/.config/'
 alias fp 'ffprobe -hide_banner'
 alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
+alias htop 'btm --basic'
 
 ## mpv ##
 alias mna 'mpv --no-resume-playback --no-audio'
@@ -103,9 +106,9 @@ alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
-alias garuda "qemu-system-x86_64 -hda $HOME/Documents/vm/garudalinux/garudalinux.img -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
-alias cachy "qemu-system-x86_64 -hda $HOME/Documents/vm/cachyos/kdeplasma.img -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
-alias ubuntu "qemu-system-x86_64 -hda $HOME/Documents/vm/ubuntu/ubuntu.img -m 8G -smp 6-accel kvm -vga virtio -full-screen"
+alias garudavm "qemu-system-x86_64 -hda $HOME/Documents/vm/garudalinux/garudalinux.img -net nic,model=virtio -net user -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
+alias cachyvm "qemu-system-x86_64 -drive file=$HOME/Documents/vm/cachyos/cachyos.qcow2,format=qcow2 -accel kvm -m 8G -smp 6 -net nic,model=virtio -net user,hostfwd=tcp::8888-:22 -vga virtio -full-screen"
+alias poposvm "qemu-system-x86_64 -drive file=$HOME/Documents/vm/pop!_os/popos.qcow2,format=qcow2 -net nic,model=virtio -net user,hostfwd=tcp::8888-:22 -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
 
 
 ### Environment Variable ###
@@ -133,12 +136,12 @@ function yt
 end
 
 ## File Manager ##
-# `yy` shell wrapper that provides the ability to change the current working directory when exiting Yazi
-function yy
+# shell wrapper that provides the ability to change the current working directory when exiting Yazi
+function y
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"
-    if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-        cd -- "$cwd"
+    if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
     end
     rm -f -- "$tmp"
 end

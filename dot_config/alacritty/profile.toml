@@ -13,7 +13,9 @@ blur = false
 startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [font]
-normal = { family = "Moralerspace Neon HWNF", style = "Regular" }
+normal = { family = "Moralerspace Radon HWNF", style = "Regular" }
+bold = { family = "Moralerspace Radon HWNF", style = "Regular" }
+italic = { family = "Moralerspace Radon HWNF", style = "Regular" }
 size = 16.0
 
 [selection]

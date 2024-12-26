@@ -17,14 +17,14 @@
 	path = ~/.config/delta/themes/catppuccin_mocha.gitconfig
 [delta]
 	navigate = true    # use n and N to move between diff sections
-	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	dark = true
 	syntax-theme = "Coldark-Dark"  # `delta --show-syntax-themes` to check color demo.
 	side-by-side = true
 	line-numbers = true
 [diff]
 	colorMoved = default
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
