@@ -18,9 +18,9 @@
 [delta]
 	navigate = true    # use n and N to move between diff sections
 	dark = true
-	syntax-theme = "Coldark-Dark"  # `delta --show-syntax-themes` to check color demo.
 	side-by-side = true
 	line-numbers = true
+	features = "catppuccin-mocha"
 [diff]
 	colorMoved = default
 [merge]

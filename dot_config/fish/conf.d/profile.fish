@@ -33,7 +33,7 @@ alias fp 'ffprobe -hide_banner'
 alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
-alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 600'
+alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 0600'
 alias htop 'btm --basic'
 
 ## mpv ##
@@ -68,12 +68,12 @@ alias pass 'pacman -Ss'
 alias pasi 'pacman -Si'
 alias paqs 'pacman -Qs'
 alias paqi 'pacman -Qi'
+alias paqe 'pacman -Qe'
 
 ## NetworkManager ##
 alias ngs 'nmcli general status'
 alias ndshow 'nmcli device show'
 alias ndstat 'nmcli device status'
-alias cons 'nmcli connection show "Wired connection 1"'
 
 ## Network Debugging ##
 alias ntwk 'journalctl -fu NetworkManager.service'
@@ -106,22 +106,27 @@ alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
-alias garudavm "qemu-system-x86_64 -hda $HOME/Documents/vm/garudalinux/garudalinux.img -net nic,model=virtio -net user -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
-alias cachyvm "qemu-system-x86_64 -drive file=$HOME/Documents/vm/cachyos/cachyos.qcow2,format=qcow2 -accel kvm -m 8G -smp 6 -net nic,model=virtio -net user,hostfwd=tcp::8888-:22 -vga virtio -full-screen"
-alias poposvm "qemu-system-x86_64 -drive file=$HOME/Documents/vm/pop!_os/popos.qcow2,format=qcow2 -net nic,model=virtio -net user,hostfwd=tcp::8888-:22 -m 8G -smp 6 -accel kvm -vga virtio -full-screen"
+function runvm
+    set -l VM_IMG_DIR "$HOME/vm"
+    # $argv must be "cachyos" or "popos"
+    qemu-system-x86_64 -hda "$VM_IMG_DIR/$argv.qcow2" \
+        -smp 6 -m 8G -accel kvm \
+        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -audio pipewire,model=virtio \
+        -vga virtio -full-screen
+end
 
 
 ### Environment Variable ###
 
 set -x EDITOR /usr/bin/helix
 set -x VISUAL /usr/bin/helix
-# set -x BAT_THEME 'Catppuccin Mocha'
 set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
-# set -x ELECTRON_OZONE_PLATFORM_HINT wayland
 
 ## Rust-Lang ##
 # Add the path of cargo to the $PATH
+# NOTE: No need to write this in Rust 1.83.0; just restart your shell after installing Rust
 if test -d ~/.cargo/bin
     if not contains -- ~/.cargo/bin $PATH
         set -p PATH ~/.cargo/bin
@@ -132,6 +137,7 @@ end
 
 # Run yt-dlp with the specified profile
 function yt
+    # TODO: list up files in ~/.config/yt-dlp/ first
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
 end
 
@@ -166,11 +172,14 @@ function memo
     helix --working-dir $notePath $noteFilename
 end
 
+# Garuda Linux-specific fastfetch configuration
 if status --is-interactive && type -q fastfetch
-    if test $TERM = alacritty
-        fastfetch --logo arch
-    else
-        fastfetch --load-config dr460nized
+    if test (hostname) = garuda
+        if test $TERM = alacritty
+            fastfetch --logo arch
+        else
+            fastfetch --load-config dr460nized
+        end
     end
 end
 
