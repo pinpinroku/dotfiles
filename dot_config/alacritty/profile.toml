@@ -1,6 +1,7 @@
 [general]
 import = [ 
-  "themes/themes/nord.toml",
+  # "themes/themes/nord.toml",
+  "themes/themes/catppuccin_mocha.toml",
   # "themes/themes/synthwave_84.toml",
 ]
 live_config_reload = true

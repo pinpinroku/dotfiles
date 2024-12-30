@@ -3,6 +3,8 @@
 # Define the directory for themes
 theme_dir="$(bat --config-dir)/themes"
 
+mkdir -p $theme_dir
+
 # Base URL for the themes
 base_url="https://github.com/catppuccin/bat/raw/main/themes"
 
