@@ -107,9 +107,11 @@ alias gl 'git log --graph --oneline --decorate --all'
 
 ## VM ##
 function runvm
-    set -l VM_IMG_DIR "$HOME/vm"
-    # $argv must be "cachyos" or "popos"
-    qemu-system-x86_64 -hda "$VM_IMG_DIR/$argv.qcow2" \
+    set -l path_to_image $argv[1]
+    if test -z "$path_to_image"
+        set path_to_image "$HOME/vm/cachyos.qcow2"
+    end
+    qemu-system-x86_64 -hda "$path_to_image" \
         -smp 6 -m 8G -accel kvm \
         -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
         -audio pipewire,model=virtio \
