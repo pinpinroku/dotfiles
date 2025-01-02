@@ -1,0 +1,14 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = "$all"
+right_format = "$os$time"
+
+[fill]
+symbol = ' '
+
+[time]
+disabled = false
+time_format = '%T'
+
+[os]
+disabled = false
