@@ -6,12 +6,21 @@ import = [
 ]
 live_config_reload = true
 
+[env]
+# TERM = "xterm-256color"  # For SSH compatibility issue
+WINIT_X11_SCALE_FACTOR = "1"
+
 [window]
+title = "Alacritty@CachyOS"
 dimensions = { columns = 150, lines = 38 }
 decorations = "Full"  # None | Full
 opacity = 0.9
 blur = false
 startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+
+[window.class]
+instance = "Alacritty"
+general = "Alacritty"
 
 [font]
 normal = { family = "Moralerspace Radon HWNF", style = "Regular" }

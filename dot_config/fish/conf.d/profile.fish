@@ -185,4 +185,4 @@ if status --is-interactive && type -q fastfetch
     end
 end
 
-set -x STARSHIP_CONFIG ~/.config/starship/powerline.toml
+set -x STARSHIP_CONFIG ~/.config/starship/starship.toml
