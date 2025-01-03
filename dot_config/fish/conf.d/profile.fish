@@ -1,6 +1,17 @@
 ### Initialization ###
 
-# Initialize starship prompt and zoxide
+
+### Environment Variable ###
+
+set -x EDITOR /usr/bin/helix
+set -x VISUAL /usr/bin/helix
+set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
+set -x FZF_DEFAULT_OPTS '--ansi --reverse'
+set -x STARSHIP_CONFIG ~/.config/starship/starship.toml
+
+
+## Initial Setup ##
+
 if status --is-interactive
     # Set vi mode
     fish_vi_key_bindings
@@ -15,31 +26,32 @@ end
 
 ### Alias ###
 
+alias e yazi
+alias cl clear
 alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --sort Name'
 alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
-alias e yazi
-alias cl clear
-alias cp 'cp -iv'
-alias mv 'mv -iv'
-alias rm 'rm -v'
-alias mkdir 'mkdir -v'
+alias cp 'cp --interactive --verbose'
+alias mv 'mv --interactive --verbose'
+alias rm 'rm --verbose'
+alias ip 'ip -color=always'
+alias mkdir 'mkdir --verbose'
 alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
-alias conf 'helix --working-dir ~/backup/.config/'
+alias conf 'helix --working-dir ~/.config/'
 alias fp 'ffprobe -hide_banner'
-alias erase 'fd -tf -e jpg -e png -e jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
+alias erase 'fd --type file --extension jpg --extension png --extension jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
-alias mine 'fd -tf -e mp4 -e mkv --exec chmod -c 0600'
+alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --changes 0600'
 alias htop 'btm --basic'
 
 ## mpv ##
 alias mna 'mpv --no-resume-playback --no-audio'
-alias mnv 'mpv --profile=music --no-video'
-alias album 'mpv --profile=music (fd . -td --color always --min-depth 3 ~/Music | fzf)'
+alias mpm 'mpv --profile=music'
+alias album 'mpv --profile=music (fd . --type directory --color always --min-depth 3 ~/Music | fzf)'
 
 ## Zellij ##
 alias zl zellij
@@ -83,16 +95,6 @@ alias adhm 'journalctl -fu AdGuardHome.service'
 alias jf 'journalctl -f'
 alias jeb 'journalctl -eb'
 
-## Downloader ##
-# Run the downloader for TVer
-function tvdl
-    if test -d ~/.config/tver-dl
-        if type -q tver-dl
-            tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
-        end
-    end
-end
-
 ## git ##
 alias gs 'git status --short --branch'
 alias ga 'git add'
@@ -105,35 +107,6 @@ alias gm 'git merge'
 alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
 
-## VM ##
-function runvm
-    set -l path_to_image $argv[1]
-    if test -z "$path_to_image"
-        set path_to_image "$HOME/vm/cachyos.qcow2"
-    end
-    qemu-system-x86_64 -hda "$path_to_image" \
-        -smp 6 -m 8G -accel kvm \
-        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
-        -audio pipewire,model=virtio \
-        -vga virtio -full-screen
-end
-
-
-### Environment Variable ###
-
-set -x EDITOR /usr/bin/helix
-set -x VISUAL /usr/bin/helix
-set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
-set -x FZF_DEFAULT_OPTS '--ansi --reverse'
-
-## Rust-Lang ##
-# Add the path of cargo to the $PATH
-# NOTE: No need to write this in Rust 1.83.0; just restart your shell after installing Rust
-if test -d ~/.cargo/bin
-    if not contains -- ~/.cargo/bin $PATH
-        set -p PATH ~/.cargo/bin
-    end
-end
 
 ### Function ###
 
@@ -141,6 +114,16 @@ end
 function yt
     # TODO: list up files in ~/.config/yt-dlp/ first
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
+end
+
+## Downloader ##
+# Run the downloader for TVer
+function tvdl
+    if test -d ~/.config/tver-dl
+        if type -q tver-dl
+            tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
+        end
+    end
 end
 
 ## File Manager ##
@@ -156,16 +139,16 @@ end
 
 ## Music Utils ##
 function play-random-album
-    set -l playlist '/tmp/random_album.m3u8'
-    fd . -td --min-depth 3 -a ~/Music | shuf >$playlist
+    set --local playlist '/tmp/random_album.m3u8'
+    fd . --type directory --min-depth 3 --absolute-path ~/Music | shuf >$playlist
     mpv --profile=music $playlist
 end
 
 ## Note Taking ##
 # Create or Open Journal
 function memo
-    set -l notePath "$HOME/journal"
-    set -l noteFilename "$notePath/note-$(date +%Y-%m-%d).md"
+    set --local notePath "$HOME/journal"
+    set --local noteFilename "$notePath/note-$(date +%Y-%m-%d).md"
 
     if not test -f $noteFilename
         echo "# Notes for $(date +%Y-%m-%d)" >$noteFilename
@@ -174,15 +157,15 @@ function memo
     helix --working-dir $notePath $noteFilename
 end
 
-# Garuda Linux-specific fastfetch configuration
-if status --is-interactive && type -q fastfetch
-    if test (hostname) = garuda
-        if test $TERM = alacritty
-            fastfetch --logo arch
-        else
-            fastfetch --load-config dr460nized
-        end
+## Virtual Machine ##
+function runvm
+    set --local path_to_image $argv[1]
+    if test -z "$path_to_image"
+        set path_to_image "$HOME/vm/cachyos.qcow2"
     end
+    qemu-system-x86_64 -hda "$path_to_image" \
+        -smp 6 -m 8G -accel kvm \
+        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -audio pipewire,model=virtio \
+        -vga virtio -full-screen
 end
-
-set -x STARSHIP_CONFIG ~/.config/starship/starship.toml

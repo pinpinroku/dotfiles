@@ -102,7 +102,7 @@ columns = ["Name", "CPU%", "Mem%", "R/s", "W/s", "T.Read", "T.Write", "GMem%", "
 
 [disk.mount_filter]
 is_list_ignored = true
-list = ["/var/.*", "/boot/efi", "/srv", "/root", "/home"]
+list = ["/var/.*", "/boot", "/boot/efi", "/srv", "/root", "/home"]
 regex = true
 case_sensitive = false
 whole_word = false
@@ -111,7 +111,7 @@ whole_word = false
 [temperature]
 [temperature.sensor_filter]
 is_list_ignored = true
-list = ["k10temp", "iwlwifi", "AUXTIN.*", "PCH_.*", "PECI.*", "TSI0.*"]
+list = ["k10temp", "iwlwifi"]
 regex = true
 case_sensitive = false
 whole_word = false
