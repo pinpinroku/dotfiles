@@ -112,7 +112,6 @@ alias gl 'git log --graph --oneline --decorate --all'
 
 # Run yt-dlp with the specified profile
 function yt
-    # TODO: list up files in ~/.config/yt-dlp/ first
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
 end
 
