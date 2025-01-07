@@ -160,7 +160,7 @@ end
 function runvm
     set --local path_to_image $argv[1]
     if test -z "$path_to_image"
-        set path_to_image "$HOME/vm/cachyos.qcow2"
+        set path_to_image "$HOME/vm/img/cachyos.qcow2"
     end
     qemu-system-x86_64 -hda "$path_to_image" \
         -smp 6 -m 8G -accel kvm \
