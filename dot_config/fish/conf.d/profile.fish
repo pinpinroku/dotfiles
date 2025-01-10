@@ -28,6 +28,8 @@ end
 
 alias e yazi
 alias cl clear
+alias hx /usr/bin/helix
+alias cz /usr/bin/chezmoi
 alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --sort Name'
 alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
@@ -118,9 +120,12 @@ end
 ## Downloader ##
 # Run the downloader for TVer
 function tvdl
-    if test -d ~/.config/tver-dl
-        if type -q tver-dl
-            tver-dl | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
+    if test -d ~/.config/tver-dl; and type -q tver-dl
+        set -l result (tver-dl)
+        if not test -z "$result"
+            prinf "%s\n" "$result" | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
+        else
+            echo "No recent uploads."
         end
     end
 end
