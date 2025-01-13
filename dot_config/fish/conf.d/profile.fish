@@ -123,7 +123,7 @@ function tvdl
     if test -d ~/.config/tver-dl; and type -q tver-dl
         set -l result (tver-dl)
         if not test -z "$result"
-            prinf "%s\n" "$result" | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
+            printf "%s\n" $result | tee /dev/tty | yt-dlp --config-location ~/.config/tver-dl/yt-dlp.conf
         else
             echo "No recent uploads."
         end
