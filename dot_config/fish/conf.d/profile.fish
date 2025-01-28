@@ -43,7 +43,9 @@ alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
 alias fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
 alias conf 'helix --working-dir ~/.config/'
+alias ffmpeg 'ffmpeg -hide_banner'
 alias fp 'ffprobe -hide_banner'
+alias fpm 'ffprobe -hide_banner -v error -show_entries format_tags -show_entries stream_tags -of default=noprint_wrappers=1'
 alias erase 'fd --type file --extension jpg --extension png --extension jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
 alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
@@ -168,8 +170,12 @@ function runvm
         set path_to_image "$HOME/vm/img/cachyos.qcow2"
     end
     qemu-system-x86_64 -hda "$path_to_image" \
-        -smp 6 -m 8G -accel kvm \
-        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -accel kvm \
+        -cpu host \
+        -smp cores=12 \
+        -m 16G \
+        -vga virtio \
         -audio pipewire,model=virtio \
-        -vga virtio -full-screen
+        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -full-screen
 end
