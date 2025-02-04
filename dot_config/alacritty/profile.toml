@@ -12,11 +12,11 @@ WINIT_X11_SCALE_FACTOR = "1"
 
 [window]
 title = "Alacritty@CachyOS"
-dimensions = { columns = 150, lines = 38 }
-decorations = "Full"  # None | Full
-opacity = 0.9
+# dimensions = { columns = 150, lines = 38 }
+decorations = "None"  # None | Full
+opacity = 0.85
 blur = false
-startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [window.class]
 instance = "Alacritty"
