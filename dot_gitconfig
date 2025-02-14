@@ -13,14 +13,12 @@
 	rebase = false
 [interactive]
 	diffFilter = delta --color-only
-[include]
-	path = ~/.config/delta/themes/catppuccin_mocha.gitconfig
 [delta]
 	navigate = true    # use n and N to move between diff sections
 	dark = true
 	side-by-side = true
 	line-numbers = true
-	features = "catppuccin-mocha"
+	features = "Knagawa"
 [diff]
 	colorMoved = default
 [merge]
