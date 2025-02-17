@@ -139,73 +139,46 @@ whole_word = false
 #
 # This will have the lowest precedence if a custom colour palette is set,
 # or overridden if the command-line flag for a built-in theme is set.
-#theme = "default"
+theme = "default"
 
-### Catppuccin Mocha ###
-[styles.tables]
-headers = {color = "#f5e0dc"}
+### kanagawa-dragon ###
 [styles.cpu]
-all_entry_color = "#f5e0dc"
-avg_entry_color = "#eba0ac"
-cpu_core_colors = ["#f38ba8","#fab387","#f9e2af","#a6e3a1","#74c7ec","#cba6f7"]
+all_entry_color = "#8a9a7b"
+avg_entry_color = "#c4746e"
+cpu_core_colors = ["#938AA9", "#E6C384", "#7AA89F", "#7AA89F", "#7FB4CA", "#7AA89F", "#7AA89F", "#7FB4CA"]
+
 [styles.memory]
-ram_color = "#a6e3a1"
-swap_color = "#fab387"
-gpu_colors = ["#74c7ec","#cba6f7","#f38ba8","#fab387","#f9e2af","#a6e3a1"]
-arc_color = "#89dceb"
+ram_color = "#938AA9"
+cache_color = "#E46876"
+swap_color = "#E6C384"
+arc_color = "#7AA89F"
+gpu_colors = ["#7FB4CA", "#E46876", "#8ea4a2", "#8a9a7b", "#8ba4b0", "#c4746e"]
+
 [styles.network]
-rx_color = "#a6e3a1"
-tx_color = "#f38ba8"
-[styles.widgets]
-widget_title = {color = "#f2cdcd"}
-border_color = "#585b70"
-selected_border_color = "#f5c2e7"
-text = {color = "#cdd6f4"}
-selected_text = {color = "#11111b", bg_color = "#cba6f7"}
-[styles.graphs]
-graph_color = "#a6adc8"
+rx_color = "#938AA9"
+tx_color = "#E6C384"
+rx_total_color = "#7AA89F"
+tx_total_color = "#7AA89F"
+
 [styles.battery]
-high_battery_color = "#a6e3a1"
-medium_battery_color = "#f9e2af"
-low_battery_color = "#f38ba8"
+high_battery_color = "#8a9a7b"
+medium_battery_color = "#c4b28a"
+low_battery_color = "#c4746e"
 
-#[styles.cpu]
-#all_entry_color = "green"
-#avg_entry_color = "red"
-#cpu_core_colors = ["light magenta", "light yellow", "light cyan", "light green", "light blue", "cyan", "green", "blue"]
+[styles.tables]
+headers = {color = "#7FB4CA", bold = true}
 
-#[styles.memory]
-#ram_color = "light magenta"
-#cache_color = "light red"
-#swap_color = "light yellow"
-#arc_color = "light cyan"
-#gpu_colors = ["light blue", "light red", "cyan", "green", "blue", "red"]
+[styles.graphs]
+graph_color = "#727169"
+legend_text = {color = "#727169"}
 
-#[styles.network]
-#rx_color = "light magenta"
-#tx_color = "light yellow"
-#rx_total_color = "light cyan"
-#tx_total_color = "light green"
-
-#[styles.battery]
-#high_battery_color = "green"
-#medium_battery_color = "yellow"
-#low_battery_color = "red"
-
-#[styles.tables]
-#headers = {color = "light blue", bold = true}
-
-#[styles.graphs]
-#graph_color = "gray"
-#legend_text = {color = "gray"}
-
-#[styles.widgets]
-#border_color = "gray"
-#selected_border_color = "light blue"
-#widget_title = {color = "gray"}
-#text = {color = "gray"}
-#selected_text = {color = "black", bg_color = "light blue"}
-#disabled_text = {color = "dark gray"}
+[styles.widgets]
+border_color = "#727169"
+selected_border_color = "#7FB4CA"
+widget_title = {color = "#727169"}
+text = {color = "#727169"}
+selected_text = {color = "#C8C093", bg_color = "#2D4F67"}
+disabled_text = {color = "#717C7C"}  # katanaGray
 
 # Layout - layouts follow a pattern like this:
 # [[row]] represents a row in the application.

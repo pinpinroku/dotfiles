@@ -15,7 +15,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 title = "Alacritty@CachyOS"
 # dimensions = { columns = 150, lines = 38 }
 decorations = "None"  # None | Full
-opacity = 0.80
+# opacity = 0.80
 blur = false
 startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
 

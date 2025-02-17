@@ -47,7 +47,7 @@ alias ffmpeg 'ffmpeg -hide_banner'
 alias fp 'ffprobe -hide_banner'
 alias fpm 'ffprobe -hide_banner -v error -show_entries format_tags -show_entries stream_tags -of default=noprint_wrappers=1'
 alias erase 'fd --type file --extension jpg --extension png --extension jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
-alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme dark -style ascii'
+alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi -style unicode'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --changes 0600'
 alias htop 'btm --basic'
