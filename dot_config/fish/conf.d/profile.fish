@@ -1,6 +1,5 @@
 ### Initialization ###
 
-
 ### Environment Variable ###
 
 set -x EDITOR /usr/bin/helix
@@ -8,7 +7,6 @@ set -x VISUAL /usr/bin/helix
 set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 set -x STARSHIP_CONFIG ~/.config/starship/starship.toml
-
 
 ## Initial Setup ##
 
@@ -23,21 +21,20 @@ if status --is-interactive
     zoxide init fish | source
 end
 
-
 ### Alias ###
 
 alias e yazi
-alias cl clear
+alias cl 'command clear'
 alias hx /usr/bin/helix
 alias cz /usr/bin/chezmoi
 alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --sort Name'
 alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
-alias cp 'cp --interactive --verbose'
-alias mv 'mv --interactive --verbose'
-alias rm 'rm --verbose'
-alias ip 'ip -color=always'
-alias mkdir 'mkdir --verbose'
+alias cp 'command cp --interactive --verbose'
+alias mv 'command mv --interactive --verbose'
+alias rm 'command rm --verbose'
+alias ip 'command ip -color=always'
+alias mkdir 'command mkdir --verbose'
 alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
@@ -53,9 +50,24 @@ alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --change
 alias htop 'btm --basic'
 
 ## mpv ##
-alias mna 'mpv --no-resume-playback --no-audio'
-alias mpm 'mpv --profile=music'
-alias album 'mpv --profile=music (fd . --type directory --color always --min-depth 3 ~/Music | fzf)'
+alias mna 'command mpv --no-resume-playback --no-audio'
+alias mpm 'command mpv --profile=music'
+function select_and_play_album
+    set music_dir ~/Music
+    set min_depth 3
+
+    set album_dir (fd . \
+        --type directory \
+        --color always \
+        --min-depth $min_depth \
+        $music_dir | fzf --preview 'eza --color=always --tree --icons {}')
+
+    if test -n "$album_dir"
+        mpv --profile=music "$album_dir"
+    else
+        echo "アルバムが選択されませんでした。"
+    end
+end
 
 ## Zellij ##
 alias zl zellij
@@ -110,7 +122,6 @@ alias gd 'git diff'
 alias gm 'git merge'
 alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
-
 
 ### Function ###
 
@@ -178,4 +189,12 @@ function runvm
         -audio pipewire,model=virtio \
         -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
         -full-screen
+end
+
+## Ignore History ##
+function fish_should_add_to_history
+    for cmd in exit mpv mna fp eval mv rm wiki
+        string match -qr "^$cmd" -- $argv; and return 1
+    end
+    return 0
 end
