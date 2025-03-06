@@ -24,17 +24,17 @@ end
 ### Alias ###
 
 alias e yazi
-alias cl 'command clear'
+alias cl clear
 alias hx /usr/bin/helix
 alias cz /usr/bin/chezmoi
 alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --sort Name'
 alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
-alias cp 'command cp --interactive --verbose'
-alias mv 'command mv --interactive --verbose'
-alias rm 'command rm --verbose'
-alias ip 'command ip -color=always'
-alias mkdir 'command mkdir --verbose'
+alias cp 'cp -iv'
+alias mv 'mv -iv'
+alias rm 'rm -v'
+alias ip 'ip -color=always'
+alias mkdir 'mkdir --verbose'
 alias todo 'helix --working-dir ~/note/ ~/note/todo.md'
 alias note 'helix --working-dir ~/note/'
 alias list 'helix /tmp/input_list.txt'
@@ -50,8 +50,9 @@ alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --change
 alias htop 'btm --basic'
 
 ## mpv ##
-alias mna 'command mpv --no-resume-playback --no-audio'
-alias mpm 'command mpv --profile=music'
+alias mna 'mpv --no-resume-playback --no-audio'
+alias mpm 'mpv --profile=music'
+
 function select_and_play_album
     set music_dir ~/Music
     set min_depth 3
@@ -77,19 +78,8 @@ alias zld 'zellij delete-session'
 alias zlk 'zellij kill-session'
 
 ## systemctl ##
-alias systat 'systemctl status'
-alias systatu 'systemctl status --user'
-alias systop 'systemctl stop'
-alias systopu 'systemctl stop --user'
-alias systart 'systemctl start'
-alias systartu 'systemctl start --user'
-alias sysres 'systemctl restart'
-alias sysresu 'systemctl restart --user'
-alias sysrel 'systemctl reload'
-alias sysrelu 'systemctl reload --user'
-alias sysdmr 'sudo systemctl daemon-reload'
 alias timers 'systemctl list-timers -a'
-alias unit-files 'systemctl list-unit-files --type=service'
+alias units 'systemctl list-unit-files --type=service'
 
 ## pacman ##
 alias pass 'pacman -Ss'
@@ -193,8 +183,10 @@ end
 
 ## Ignore History ##
 function fish_should_add_to_history
-    for cmd in exit mpv mna fp eval mv rm wiki
-        string match -qr "^$cmd" -- $argv; and return 1
+    for cmd in exit wiki z ls fastfetch
+        string match --quiet --regex "^$cmd" -- $argv; and return 1
     end
+    # Check for Japanese characters in arguments
+    string match --quiet --regex '[\\p{Han}\\p{Hiragana}\\p{Katakana}]' -- $argv; and return 1
     return 0
 end
