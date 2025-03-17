@@ -44,14 +44,15 @@ alias ffmpeg 'ffmpeg -hide_banner'
 alias fp 'ffprobe -hide_banner'
 alias fpm 'ffprobe -hide_banner -v error -show_entries format_tags -show_entries stream_tags -of default=noprint_wrappers=1'
 alias erase 'fd --type file --extension jpg --extension png --extension jpeg --exec-batch exiftool -overwrite_original -all= {}' # Remove all image metadata
-alias duf 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi -style unicode'
+abbr -a df 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi'
+alias du 'du -sh'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --changes 0600'
 alias htop 'btm --basic'
 
 ## mpv ##
-alias mna 'mpv --no-resume-playback --no-audio'
-alias mpm 'mpv --profile=music'
+abbr -a mna 'mpv --no-resume-playback --no-audio'
+abbr -a mpm 'mpv --profile=music'
 
 function select_and_play_album
     set music_dir ~/Music
@@ -80,6 +81,7 @@ alias zlk 'zellij kill-session'
 ## systemctl ##
 alias timers 'systemctl list-timers -a'
 alias units 'systemctl list-unit-files --type=service'
+alias sdr 'sudo systemctl daemon-reload'
 
 ## pacman ##
 alias pass 'pacman -Ss'
@@ -90,12 +92,11 @@ alias paqe 'pacman -Qe'
 
 ## NetworkManager ##
 alias ngs 'nmcli general status'
-alias ndshow 'nmcli device show'
-alias ndstat 'nmcli device status'
 
 ## Network Debugging ##
 alias ntwk 'journalctl -fu NetworkManager.service'
 alias adhm 'journalctl -fu AdGuardHome.service'
+abbr -a ports 'ss -tulne4'
 
 ## Journal ##
 alias jf 'journalctl -f'
@@ -166,20 +167,26 @@ end
 
 ## Virtual Machine ##
 function runvm
-    set --local path_to_image $argv[1]
-    if test -z "$path_to_image"
-        set path_to_image "$HOME/vm/img/cachyos.qcow2"
+    set --local IMG $argv[1]
+    if test -z "$IMG"
+        set IMG "$HOME/vm/cachyos/cachyos.qcow2"
     end
-    qemu-system-x86_64 -hda "$path_to_image" \
+    qemu-system-x86_64 -hda "$IMG" \
+        -M q35 \
         -accel kvm \
         -cpu host \
-        -smp cores=12 \
+        -smp cores=6 \
         -m 16G \
         -vga virtio \
+        -display sdl,gl=on,show-cursor=on \
         -audio pipewire,model=virtio \
         -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -usb -device usb-tablet \
+        -object memory-backend-memfd,id=mem1,size=16G \
+        -machine memory-backend=mem1 \
         -full-screen
 end
+abbr -a qimg 'qemu-img create -f qcow2 img.qcow2 -o nocow=on 50G'
 
 ## Ignore History ##
 function fish_should_add_to_history
