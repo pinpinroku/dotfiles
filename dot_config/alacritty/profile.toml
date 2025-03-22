@@ -1,9 +1,9 @@
 [general]
 import = [ 
   # "themes/themes/nord.toml",
+  # "themes/themes/kanagawa_wave.toml",
   "themes/themes/kanagawa_dragon.toml",
   # "themes/themes/catppuccin_mocha.toml",
-  # "themes/themes/synthwave_84.toml",
 ]
 live_config_reload = true
 
@@ -13,11 +13,11 @@ WINIT_X11_SCALE_FACTOR = "1"
 
 [window]
 title = "Alacritty@CachyOS"
-# dimensions = { columns = 150, lines = 38 }
-decorations = "None"  # None | Full
-opacity = 0.85
-blur = false
-startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
+dimensions = { columns = 148, lines = 40 }
+decorations = "Full"  # None | Full
+opacity = 0.75 
+blur = true
+startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [window.class]
 instance = "Alacritty"
@@ -40,7 +40,7 @@ unfocused_hollow = false
 thickness = 0.3
 
 [terminal]
-shell = { program = "/usr/bin/fish", args = [] }
+shell = { program = "/usr/bin/fish", args = ["--private"] }
 
 [mouse]
 hide_when_typing = true

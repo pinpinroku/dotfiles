@@ -48,7 +48,11 @@ abbr -a df 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var
 alias du 'du -sh'
 alias fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 alias mine 'fd --type file --extension mp4 --extension mkv --exec chmod --changes 0600'
+alias top 'btm --basic'
 alias htop 'btm --basic'
+alias memory 'free -h'
+alias forget 'qdbus6 org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory'
+alias remove-empty-journal 'fd . --type file --size -23b ~/journal -X rm -v'
 
 ## mpv ##
 abbr -a mna 'mpv --no-resume-playback --no-audio'
@@ -84,11 +88,10 @@ alias units 'systemctl list-unit-files --type=service'
 alias sdr 'sudo systemctl daemon-reload'
 
 ## pacman ##
-alias pass 'pacman -Ss'
-alias pasi 'pacman -Si'
-alias paqs 'pacman -Qs'
-alias paqi 'pacman -Qi'
-alias paqe 'pacman -Qe'
+abbr -a search "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+abbr -a lookup "pacman -Qeq | fzf --multi --preview 'pacman -Qi {}'"
+alias uninstall "pacman -Qeq | fzf --multi --preview 'pacman -Qi {}' | xargs -ro sudo pacman -Rns"
+alias foreign 'pacman -Qm'
 
 ## NetworkManager ##
 alias ngs 'nmcli general status'
@@ -164,29 +167,6 @@ function memo
 
     helix --working-dir $notePath $noteFilename
 end
-
-## Virtual Machine ##
-function runvm
-    set --local IMG $argv[1]
-    if test -z "$IMG"
-        set IMG "$HOME/vm/cachyos/cachyos.qcow2"
-    end
-    qemu-system-x86_64 -hda "$IMG" \
-        -M q35 \
-        -accel kvm \
-        -cpu host \
-        -smp cores=6 \
-        -m 16G \
-        -vga virtio \
-        -display sdl,gl=on,show-cursor=on \
-        -audio pipewire,model=virtio \
-        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
-        -usb -device usb-tablet \
-        -object memory-backend-memfd,id=mem1,size=16G \
-        -machine memory-backend=mem1 \
-        -full-screen
-end
-abbr -a qimg 'qemu-img create -f qcow2 img.qcow2 -o nocow=on 50G'
 
 ## Ignore History ##
 function fish_should_add_to_history
