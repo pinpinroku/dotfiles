@@ -119,12 +119,31 @@ alias gl 'git log --graph --oneline --decorate --all'
 
 ### Function ###
 
+## Downloader ##
 # Run yt-dlp with the specified profile
 function yt
     yt-dlp --config-location ~/.config/yt-dlp/$argv.conf
 end
 
-## Downloader ##
+# Download unnamed video
+function download-video
+    set -l title $argv[1]
+    set -l url $argv[2]
+
+    set -l valid_title "$title"
+    set -l length (echo "$title" | wc -c)
+
+    # Check if the length exceeds 255 characters
+    if test $length -ge 255
+        # Truncate the title to ensure the full path is within limits
+        set short_title (echo "$title" | awk 'print substr($0, 0, 80)')
+        set valid_title "$short_title"
+    end
+
+    # Use the modified title in the yt-dlp command
+    yt-dlp --output "$valid_title.%(ext)s" "$url"
+end
+
 # Run the downloader for TVer
 function tvdl
     if test -d ~/.config/tver-dl; and type -q tver-dl
