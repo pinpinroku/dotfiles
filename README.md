@@ -9,10 +9,10 @@ Personal config files managed by `chezmoi`.
 |DE           | KDE Plasma 6 |
 |WM           | Kwin Wayland |
 |Shell        | fish |
-|Terminal     | Alacritty + zellij \| kitty \| Ghostty |
+|Terminal     | Alacritty + zellij \| kitty |
 |Editor       | Helix |
-|Browser      | cachy-browser & Brave |
+|Browser      | LibreWolf |
 |Vidoe Player | mpv |
-|Music Player | mpv \| Elisa \| foobar2000 (wine) |
+|Music Player | mpv \| foobar2000 (wine) |
 |Image Viewer | feh |
 |File Manager | yazi |
