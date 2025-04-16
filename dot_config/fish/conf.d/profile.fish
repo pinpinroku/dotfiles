@@ -29,6 +29,7 @@ alias hx /usr/bin/helix
 alias cz /usr/bin/chezmoi
 alias cat 'bat --style header --style snip --style changes --style header'
 alias l 'eza --color=always --group-directories-first --icons --sort Name'
+alias tree='eza --tree --color=always --group-directories-first --icons --git-ignore'
 alias lss 'eza --long --color=always --group-directories-first --icons --sort size'
 alias cp 'cp -iv'
 alias mv 'mv -iv'
