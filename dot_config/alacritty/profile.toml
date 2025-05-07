@@ -14,20 +14,21 @@ WINIT_X11_SCALE_FACTOR = "1"
 [window]
 title = "Alacritty@CachyOS"
 dimensions = { columns = 148, lines = 40 }
-decorations = "Full"  # None | Full
+decorations = "None"  # None | Full
 # opacity = 0.85 
 # blur = true
-startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [window.class]
 instance = "Alacritty"
 general = "Alacritty"
 
 [font]
-normal = { family = "UDEV Gothic 35NFLG", style = "Regular" }
-bold = { family = "UDEV Gothic 35NFLG", style = "Regular" }
-italic = { family = "UDEV Gothic 35NFLG", style = "Regular" }
-size = 18.0
+normal = { family = "Moralerspace Argon NF", style = "Regular" }
+# normal = { family = "UDEV Gothic 35NFLG", style = "Regular" }
+# bold = { family = "UDEV Gothic 35NFLG", style = "Regular" }
+# italic = { family = "UDEV Gothic 35NFLG", style = "Regular" }
+size = 20.0
 
 [selection]
 save_to_clipboard = true

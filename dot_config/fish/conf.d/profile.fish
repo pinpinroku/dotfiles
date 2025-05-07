@@ -117,6 +117,7 @@ alias gd 'git diff'
 alias gm 'git merge'
 alias gsw 'git switch'
 alias gl 'git log --graph --oneline --decorate --all'
+alias grp 'git reset HEAD~' # Cancel previous commit and revert the commit back to staging area
 
 ### Function ###
 
