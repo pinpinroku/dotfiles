@@ -7,14 +7,15 @@ set -x VISUAL /usr/bin/helix
 set -x FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
 set -x FZF_DEFAULT_OPTS '--ansi --reverse'
 set -x STARSHIP_CONFIG ~/.config/starship/starship-mokka.toml
+# set -x STARSHIP_CONFIG ~/.config/starship/starship.toml
 
 ## Initial Setup ##
 
 if status --is-interactive
     ## Set vi mode ##
     fish_vi_key_bindings
-    # set fish_cursor_default block
-    # set fish_cursor_insert line
+    set fish_cursor_default block
+    set fish_cursor_insert line
     ## init starship ##
     starship init fish | source
     ## init zoxide ##
@@ -41,7 +42,6 @@ alias ip='ip -color=always'
 alias mkdir='mkdir --verbose'
 alias todo='helix --working-dir ~/note/ ~/note/todo.md'
 alias note='helix --working-dir ~/note/'
-alias list='helix /tmp/input_list.txt'
 alias fig='helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
 alias conf='helix --working-dir ~/.config/'
 alias ffmpeg='ffmpeg -hide_banner'
@@ -57,17 +57,21 @@ alias memory='free -h'
 alias forget='qdbus6 org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory'
 alias remove-empty-journal='fd . --type file --size -23b ~/journal -X rm -v'
 
-abbr -a df 'duf -hide-fs tmpfs,vfat,devtmpfs,efivarfs -hide-mp /,/root,/srv,/var/cache,/var/log,/var/tmp -theme ansi'
+abbr -a df \
+    'duf \
+    -hide-fs vfat,devtmpfs,efivarfs \
+    -hide-mp "/,/root,/srv,/dev/shm,/var/*,/run/credentials/*" \
+    -theme ansi'
 
 ## mpv ##
 abbr -a mna 'mpv --no-resume-playback --no-audio'
 abbr -a mpm 'mpv --profile=music'
 
 function select_and_play_album
-    set music_dir ~/Music
-    set min_depth 3
+    set --local music_dir ~/Music
+    set --local min_depth 3
 
-    set album_dir (fd . \
+    set --local album_dir (fd . \
         --type directory \
         --color always \
         --min-depth $min_depth \
@@ -127,6 +131,17 @@ alias grp='git reset HEAD~' # Cancel previous commit and revert the commit back 
 ### Function ###
 
 ## Downloader ##
+# Download videos from TVer
+function download_videos_from_tver
+    set --local input_file (mktemp -t 'url-list.XXXXXX' --suffix '.txt')
+    helix "$input_file"
+    yt-dlp_linux \
+        --ignore-config \
+        --config-location "$HOME/.config/yt-dlp/tver.conf" \
+        --batch-file "$input_file"
+    and rm "$input_file"
+end
+
 # Run yt-dlp with the specified profile
 function yt
     yt-dlp --config-location "~/.config/yt-dlp/$argv.conf"
@@ -162,9 +177,9 @@ end
 
 ## Music Utils ##
 function play-random-album
-    set --local playlist '/tmp/random_album.m3u8'
+    set --local playlist (mktemp -t 'random-playlist.XXXXXXXX' --suffix '.m3u8')
     fd . --type directory --min-depth 3 --absolute-path ~/Music | shuf >$playlist
-    mpv --profile=music $playlist
+    mpv --profile=music $playlist; and rm $playlist
 end
 
 ## Note Taking ##

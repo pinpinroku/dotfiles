@@ -30,9 +30,6 @@ local function send_notification(track, title, artist, album)
     -- Format track number with # and padding (e.g., #01)
     local track_str = string.format("%02d", track)
 
-    -- Construct the notification body
-    local body = string.format(" 🎵%s %s\n 👤%s\n 💿%s", track_str, title, artist, album)
-
     -- Use notify-send to display the notification with mpv icon
     utils.subprocess({
         args = {
@@ -41,7 +38,8 @@ local function send_notification(track, title, artist, album)
             "-t", "10000",   -- Duration in milliseconds (10 seconds)
             "--hint=string:desktop-entry:mpv",
             "-i", "mpv",    -- Icon name (assumes 'mpv' icon is available)
-            body,           -- Body of the notification
+            string.format("🎵%s %s", track_str, title),  -- Track and Title
+            string.format("👤 %s\n 💿 %s", artist, album), -- Artist and Album
         },
         cancellable = false
     })

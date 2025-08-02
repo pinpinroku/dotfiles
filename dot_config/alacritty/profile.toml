@@ -1,8 +1,8 @@
 [general]
 import = [ 
-  # "themes/themes/kanagawa_dragon.toml",
+  "themes/themes/kanagawa_dragon.toml",
   # "themes/themes/tokyo_night_storm.toml",
-  "themes/themes/catppuccin_mocha.toml",
+  # "themes/themes/catppuccin_mocha.toml",
 ]
 live_config_reload = true
 
@@ -14,7 +14,7 @@ WINIT_X11_SCALE_FACTOR = "1"
 title = "Alacritty@CachyOS"
 # dimensions = { columns = 148, lines = 40 }
 decorations = "None"  # None | Full
-opacity = 0.80
+opacity = 0.85
 # blur = true
 startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
 
@@ -23,7 +23,7 @@ instance = "Alacritty"
 general = "Alacritty"
 
 [font]
-normal = { family = "Moralerspace Radon HWNF", style = "Regular" }
+normal = { family = "Moralerspace Argon HW", style = "Regular" }
 # normal = { family = "UDEV Gothic 35NFLG", style = "Regular" }
 # bold = { family = "UDEV Gothic 35NFLG", style = "Regular" }
 # italic = { family = "UDEV Gothic 35NFLG", style = "Regular" }
