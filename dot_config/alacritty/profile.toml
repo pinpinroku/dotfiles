@@ -15,7 +15,7 @@ title = "Alacritty@CachyOS"
 # dimensions = { columns = 148, lines = 40 }
 decorations = "None"  # None | Full
 opacity = 0.85
-# blur = true
+blur = true
 startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
 
 [window.class]

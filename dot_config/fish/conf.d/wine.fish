@@ -1,8 +1,4 @@
-#!/usr/bin/env fish
-
-# File: ~/.config/fish/conf.d/wine.fish
-
-## Wine settings and aliases ##
+## Wine Configurations ##
 
 # Runs foobar2000 music player through wine
 function fb2k
