@@ -8,10 +8,10 @@ function runvm
     set --local VMNAME $argv[1]
 
     if test -z "$VMNAME"
-        set VMNAME cachyos
+        set VMNAME gnome-grub
     end
 
-    set --local IMG "$HOME/vm/$VMNAME/$VMNAME.qcow2"
+    set --local IMG "$HOME/vm/cachyos/$VMNAME.qcow2"
 
     qemu-system-x86_64 -hda "$IMG" \
         -M q35 \

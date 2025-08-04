@@ -10,7 +10,7 @@ abbr -a -- lookup "pacman -Qeq | fzf --multi --preview 'pacman -Qi {}'"
 abbr -a -- ports 'ss -tulne4'
 
 # Disk usage
-abbr -a -- df \
+abbr -a -- duf \
     'duf \
     -hide-fs vfat,devtmpfs,efivarfs \
     -hide-mp "/,/root,/srv,/dev/shm,/var/*,/run/credentials/*" \
