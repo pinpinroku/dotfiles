@@ -6,6 +6,9 @@ if status --is-interactive
     set -gx EDITOR /usr/bin/helix
     set -gx VISUAL /usr/bin/helix
 
+    # bat: cat replacement
+    set -gx BAT_STYLE 'snip,changes,header'
+
     # fzf: A command-line fuzzy finder
     set -gx FZF_DEFAULT_OPTS '--ansi --reverse'
     set -gx FZF_DEFAULT_COMMAND 'fd \
@@ -16,10 +19,12 @@ if status --is-interactive
         --exclude .git \
         --color=always'
 
-    ## Autostart zellij ##
-    set ZELLIJ_AUTO_ATTACH true
-    set ZELLIJ_AUTO_EXIT true
-    eval (zellij setup --generate-auto-start fish | string collect)
+    ## Autostart zellij if the terminal is alacritty ##
+    if test $TERM = alacritty
+        set ZELLIJ_AUTO_ATTACH true
+        set ZELLIJ_AUTO_EXIT true
+        eval (zellij setup --generate-auto-start fish | string collect)
+    end
 
     ## Set vi mode ##
     fish_vi_key_bindings

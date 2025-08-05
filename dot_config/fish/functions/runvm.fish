@@ -6,7 +6,7 @@ function runvm
         return 1
     end
 
-    set IMG_PATH ~/vm/img/$argv.qcow2
+    set IMG_PATH "~/vm/img/$argv.qcow2"
 
     qemu-system-x86_64 -hda $IMG_PATH \
         -M q35 \

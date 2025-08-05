@@ -1,23 +1,35 @@
+## Aliases ##
+alias e=yazi
+alias hx=helix
+alias zl=zellij
+alias cat=bat
+alias sctl=systemctl
+
+## Replace ls with eza ##
+alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons' # long format
+alias lt='eza -T --color=always --group-directories-first --icons --git-ignore' # tree listing
+alias l='eza --color=always --group-directories-first --icons --sort Name' # column listing
+
 ## Common ##
-abbr -a e /usr/bin/yazi
-abbr -a hx /usr/bin/helix
-abbr -a cz '/usr/bin/chezmoi -v'
-abbr -a c clear
+abbr -a cl clear
 abbr -a cp 'cp -iv'
 abbr -a mv 'mv -iv'
 abbr -a rm 'rm -v'
 abbr -a ip 'ip -color=always'
 abbr -a mkdir 'mkdir -v'
-abbr -a cat 'bat --style header --style snip --style changes --style header'
-abbr -a fd 'fd -c always'
 
 ## Edit Documents ##
 abbr -a todo 'helix --working-dir ~/note/ ~/note/todo.md'
 abbr -a note 'helix --working-dir ~/note/'
+# TODO: Make this more flexible
 abbr -a fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
 
 ## File Operation ##
+abbr -a cz 'chezmoi -v'
 abbr -a chmod 'chmod -c'
+abbr -a fd 'fd -c always'
 abbr -a fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 abbr -a erase 'fd -tf -g "*.{png,jpg,jpeg}" -x exiftool -overwrite_original -all= {}' # Remove all image metadata
 abbr -a mine 'fd -tf -g "*.{mp4,mkv}" -x chmod -c 0640'
@@ -40,49 +52,56 @@ abbr -a duf \
     -theme ansi \
     -style ascii'
 
-## Replace ls with eza ##
-alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons' # long format
-alias lt='eza -T --color=always --group-directories-first --icons --git-ignore' # tree listing
-alias l='eza --color=always --group-directories-first --icons --sort Name' # column listing
-
 ## Cleanup ##
 abbr -a forget 'qdbus6 org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory'
 abbr -a remove-empty-journal 'fd . -tf --size -23b ~/journal -x rm -v' # Remove journals with header only
 
 ## Media Editing ##
-alias ffmpeg='ffmpeg -hide_banner'
-alias ffprobe='ffprobe -hide_banner'
+abbr -a ffm 'ffmpeg -hide_banner'
+abbr -a ffp 'ffprobe -hide_banner'
 
 ## Media player ##
 abbr -a mna 'mpv --no-resume-playback --no-audio'
 abbr -a mpm 'mpv --profile=music'
 
 ## Zellij: Terminal Multiplexer ##
-alias zl='/usr/bin/zellij'
 abbr -a zla 'zellij attach'
 abbr -a zls 'zellij list-sessions'
 abbr -a zld 'zellij delete-session'
 abbr -a zlk 'zellij kill-session'
 
 ## systemctl ##
+abbr -a scs 'systemctl status'
+abbr -a scsu 'systemctl status --user'
+abbr -a start 'systemctl start'
+abbr -a stop 'systemctl stop'
+abbr -a mask_service --set-cursor 'systemctl mask %.service'
+abbr -a enable 'systemctl enable --now'
+abbr -a disable 'systemctl disable --now'
+abbr -a reload 'systemctl daemon-reload'
 abbr -a timers 'systemctl list-timers -a'
 abbr -a units 'systemctl list-unit-files --type=service'
-abbr -a sdr 'sudo systemctl daemon-reload'
 
-## pacman ##
-abbr -a uninstall "pacman -Qeq | fzf --multi --preview 'pacman -Qi {}' | xargs -ro sudo pacman -Rns"
-abbr -a foreign 'pacman -Qm'
-abbr -a ditch 'sudo pacman -Rns'
-abbr -a search "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-abbr -a lookup "pacman -Qeq | fzf --multi --preview 'pacman -Qi {}'"
+# System updates
+abbr -a update 'sudo pacman -Syu'
+abbr -a cleanup 'sudo pacman -Rns (pacman -Qdtq)'
+
+## Package management ##
+abbr -a search 'pacman -Ss'
+abbr -a install 'sudo pacman -S'
+abbr -a remove 'sudo pacman -Rns'
+abbr -a info 'pacman -Qi'
+abbr -a foreign 'pacman -Qm' # Shows packages installed by paru
+
+## AUR helper ##
+abbr -a pupdate 'paru -Sua'
+abbr -a pclean 'paru -Scc'
 
 ## Journal ##
 abbr -a jctl 'journalctl -p 3 -xb'
 abbr -a jf 'journalctl -f'
 abbr -a jeb 'journalctl -eb'
-abbr -a jcg --ser-cursor 'journalctl -b -g \'%\''
+abbr -a jcg --set-cursor 'journalctl -b -g \'%\''
 
 ## Network Debugging ##
 abbr -a wifi 'journalctl -b -eu iwd.service'
