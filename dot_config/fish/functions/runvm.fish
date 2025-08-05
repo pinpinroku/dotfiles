@@ -1,19 +1,14 @@
-## Virtual Machine ##
-
-# Creates an image
-abbr --add qimg 'qemu-img create -f qcow2 img.qcow2 -o nocow=on 50G'
-
-# Runs a virtual machine
 function runvm
-    set --local VMNAME $argv[1]
+    # Runs a virtual machine
 
-    if test -z "$VMNAME"
-        set VMNAME gnome-grub
+    if test (count $argv) -ne 1
+        echo "Usage: $(status basename) <VM_NAME>"
+        return 1
     end
 
-    set --local IMG "$HOME/vm/cachyos/$VMNAME.qcow2"
+    set IMG_PATH ~/vm/img/$argv.qcow2
 
-    qemu-system-x86_64 -hda "$IMG" \
+    qemu-system-x86_64 -hda $IMG_PATH \
         -M q35 \
         -accel kvm \
         -cpu host \
