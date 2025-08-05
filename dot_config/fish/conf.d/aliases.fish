@@ -2,7 +2,7 @@
 abbr -a e /usr/bin/yazi
 abbr -a hx /usr/bin/helix
 abbr -a cz '/usr/bin/chezmoi -v'
-abbr -a c =clear
+abbr -a c clear
 abbr -a cp 'cp -iv'
 abbr -a mv 'mv -iv'
 abbr -a rm 'rm -v'
