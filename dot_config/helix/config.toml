@@ -1,7 +1,6 @@
 # theme = "kanagawa-dragon"
-theme = "snazzy"
-# theme = "tokyonight_storm"
-# theme = "catppuccin_mocha"
+# theme = "snazzy"
+theme = "tokyonight_moon"
 
 [editor]
 mouse = false

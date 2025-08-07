@@ -7,7 +7,8 @@ function tvdl
     end
 
     set result (tver-dl)
-    if test -z $result
+    string length -q -- $result
+    if test $status -ne 0
         echo "No recent uploads. You are up-to-date!"
     end
 

@@ -11,13 +11,8 @@ if status --is-interactive
 
     # fzf: A command-line fuzzy finder
     set -gx FZF_DEFAULT_OPTS '--ansi --reverse'
-    set -gx FZF_DEFAULT_COMMAND 'fd \
-        --type file \
-        --strip-cwd-prefix \
-        --hidden \
-        --follow \
-        --exclude .git \
-        --color=always'
+    set -gx FZF_DEFAULT_COMMAND 'fd --exclude .git --color=always'
+    # set -gx FZF_DEFAULT_COMMAND 'fd --type file --strip-cwd-prefix --hidden --follow --exclude .git --color=always'
 
     ## Autostart zellij if the terminal is alacritty ##
     if test $TERM = alacritty

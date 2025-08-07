@@ -29,11 +29,10 @@ abbr -a fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.f
 ## File Operation ##
 abbr -a cz 'chezmoi -v'
 abbr -a chmod 'chmod -c'
-abbr -a fd 'fd -c always'
 abbr -a fzp 'fzf --preview="bat --color=always --style=numbers --line-range=:500 {}" --preview-window="right:50%,border-vertical"'
 abbr -a erase 'fd -tf -g "*.{png,jpg,jpeg}" -x exiftool -overwrite_original -all= {}' # Remove all image metadata
 abbr -a mine 'fd -tf -g "*.{mp4,mkv}" -x chmod -c 0640'
-abbr -a mkt 'mktemp -p /tmp '
+abbr -a mkt 'mktemp -p /tmp'
 
 ## System Analyze ##
 abbr -a df 'df -h'
@@ -45,12 +44,7 @@ abbr -a memory 'free -h'
 abbr -a hwinfo 'hwinfo --short'
 abbr -a glxinfo 'glxinfo -B'
 abbr -a vulkaninfo 'vulkaninfo --summary'
-abbr -a duf \
-    'duf \
-    -hide-fs vfat,devtmpfs,efivarfs \
-    -hide-mp "/,/root,/srv,/dev/shm,/var/*,/run/credentials/*" \
-    -theme ansi \
-    -style ascii'
+abbr -a duf 'duf -hide-fs vfat,devtmpfs,efivarfs -hide-mp "/,/root,/srv,/dev/shm,/var/*,/run/credentials/*" -theme ansi -style ascii'
 
 ## Cleanup ##
 abbr -a forget 'qdbus6 org.kde.klipper /klipper org.kde.klipper.klipper.clearClipboardHistory'
@@ -59,10 +53,14 @@ abbr -a remove-empty-journal 'fd . -tf --size -23b ~/journal -x rm -v' # Remove 
 ## Media Editing ##
 abbr -a ffm 'ffmpeg -hide_banner'
 abbr -a ffp 'ffprobe -hide_banner'
+abbr -a ffshow 'ffprobe -v error -show_streams -select_streams v -of default=noprint_wrappers=1'
+abbr -a getfps --set-cursor 'ffprobe -v error -select_streams v -show_entries stream=r_frame_rate -of default=noprint_wrappers=1:nokey=1 % | math'
+abbr -a --position anywhere -- -mc '-map_metadata -1 -c copy'
 
 ## Media player ##
 abbr -a mna 'mpv --no-resume-playback --no-audio'
 abbr -a mpm 'mpv --profile=music'
+abbr -a rsong --set-cursor 'fd \'\.(m4a|mp3|opus|flac%)$\' -tf -a --base-directory ~/Music/ -X mpv --profile=music --shuffle'
 
 ## Zellij: Terminal Multiplexer ##
 abbr -a zla 'zellij attach'
@@ -108,6 +106,9 @@ abbr -a wifi 'journalctl -b -eu iwd.service'
 abbr -a adhm 'journalctl -b -eu AdGuardHome.service'
 abbr -a ports 'ss -tulne4'
 
+## Wi-Fi Management ##
+abbr --add pwsv_off --set-cursor 'sudo iw dev % set power_save off'
+
 ## git ##
 abbr -a gs 'git status --short --branch'
 abbr -a ga 'git add'
@@ -129,4 +130,4 @@ abbr -a qimg --set-cursor 'qemu-img create -f qcow2 %.qcow2 -o nocow=on 50G'
 
 ## Celeste ##
 abbr -a modupd 'hultra -m "wegfan,jade,otobot,gb" update --install'
-abbr -a modins 'hultra -m "wegfan,jade,otobot,gb" install '
+abbr -a modins 'hultra -m "wegfan,jade,otobot,gb" install'
