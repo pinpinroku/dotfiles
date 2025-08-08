@@ -26,7 +26,7 @@ function vidget
         echo "Could not extracting Origin from given URL. Make sure the playlist URL ends with '.m3u8'."
         return 1
     end
-    echo "📣 REFERER: $REFERER"
+    echo "📣 Referer: $REFERER"
 
     # Check for required tools
     for cmd in curl ffmpeg sd
@@ -59,10 +59,32 @@ function vidget
     echo "🔧 Generating URL list..."
     set curl_config "$tmpdir/urls.txt"
     set -e filenames
-    for line in (string match -r '^https://.*' <$PLAYLIST_FILE)
-        set fname (path basename $line)
-        set -a filenames $fname
-        echo "url = \"$line\"" >>$curl_config
+    set ext (path extension $PLAYLIST_FILE)
+    # Handle playlist file extensions
+    switch $ext
+        case '.m3u8'
+            # .m3u8 playlist: expects lines with full https URLs
+            for line in (string match -r '^https://\S+' <$PLAYLIST_FILE)
+                set fname (path basename $line)
+                set -a filenames $fname
+                echo "url = \"$line\"" >>$curl_config
+            end
+        case '.txt'
+            # .txt playlist: expects lines with .jpg fragments
+            for line in (string match -r '^/\S+\.jpg$' <$PLAYLIST_FILE)
+                set fname (path basename $line)
+                set -a filenames $fname
+                echo "url = \"$REFERER$line\"" >>$curl_config
+            end
+        case '*'
+            # Unsupported playlist extension
+            echo '❌ Invalid file extension for the playlist. Only .m3u8 and .txt are supported.'
+            return 1
+    end
+
+    or begin
+        echo "❌ Failed to generate URL list from the playlist file."
+        return 1
     end
 
     set total (count $filenames)
@@ -84,7 +106,7 @@ function vidget
         --config $curl_config
 
     # Extract URLs where `exit code != 0`
-    set failed_urls (string match -rg '^(https://.+)\s(?!0$)\d+' <"$tmpdir/errors.log")
+    set failed_urls (string match -rg '^(https://\S+)\s(?!0$)\d+' <"$tmpdir/errors.log")
 
     if test (count $failed_urls) -ne 0
         echo "⚠️ Some fragments failed to download. Retrying them one by one..."
@@ -123,16 +145,36 @@ function vidget
         end
     end
 
-    # TODO: Checks first file whether it contains PNG signatur on the first 8 bytes
-    echo "🔧 Removing fake PNG header..."
-    for fname in $filenames
-        set fname "$tmpdir/$fname"
-        tail -c +71 $fname >"$fname.ts"; and command rm $fname
+    # Handle fragment conversion differently for .m3u8 and .txt playlists:
+    # .m3u8 playlists contain full URLs to fragments with a fake PNG header that must be removed.
+    # .txt playlists contain relative paths to .jpg fragments that need to be renamed to .ts.
+    switch $ext
+        case '.m3u8'
+            echo "🔧 Removing fake PNG header..."
+            for fname in $filenames
+                set fname "$tmpdir/$fname"
+                tail -c +71 $fname >"$fname.ts"; and command rm $fname
+            end
+            echo "🔧 Updating playlist with local TS filenames..."
+            and sd '^https://\S+/([^/\n]+)$' '$1.ts' $PLAYLIST_FILE
+        case '.txt'
+            echo "🔧 Renaming JPG files into TS file..."
+            for fname in $filenames
+                set fname "$tmpdir/$fname"
+                set new_name (path change-extension '.ts' $fname)
+                and mv $fname $new_name
+            end
+            echo "🔧 Updating playlist with local TS filenames..."
+            and sd '^/\S+/([^/]+)\.jpg$' '$1.ts' $PLAYLIST_FILE
+        case '*'
+            echo "⚠️ Invalid file extension for the playlist. Only .m3u8 and .txt are supported."
+            return 1
     end
 
-    # Reaname playlist paths
-    echo "🔧 Updating playlist with local TS filenames..."
-    and sd '^https://.+/(\w+)$' '$1.ts' $PLAYLIST_FILE
+    or begin
+        echo "⚠️ Warning: Failed to update playlist with local TS filenames."
+        return 1
+    end
 
     # Merge files
     echo "🎬 Merging TS files into MP4..."

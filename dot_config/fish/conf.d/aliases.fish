@@ -23,8 +23,7 @@ abbr -a mkdir 'mkdir -v'
 ## Edit Documents ##
 abbr -a todo 'helix --working-dir ~/note/ ~/note/todo.md'
 abbr -a note 'helix --working-dir ~/note/'
-# TODO: Make this more flexible
-abbr -a fig 'helix --working-dir ~/.config/fish/ ~/.config/fish/conf.d/profile.fish'
+abbr -a fig 'helix --working-dir ~/.config/fish/'
 
 ## File Operation ##
 abbr -a cz 'chezmoi -v'
@@ -61,12 +60,6 @@ abbr -a --position anywhere -- -mc '-map_metadata -1 -c copy'
 abbr -a mna 'mpv --no-resume-playback --no-audio'
 abbr -a mpm 'mpv --profile=music'
 abbr -a rsong --set-cursor 'fd \'\.(m4a|mp3|opus|flac%)$\' -tf -a --base-directory ~/Music/ -X mpv --profile=music --shuffle'
-
-## Zellij: Terminal Multiplexer ##
-abbr -a zla 'zellij attach'
-abbr -a zls 'zellij list-sessions'
-abbr -a zld 'zellij delete-session'
-abbr -a zlk 'zellij kill-session'
 
 ## systemctl ##
 abbr -a scs 'systemctl status'
