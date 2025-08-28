@@ -122,5 +122,5 @@ abbr -a gfp 'git fetch; and git pull' # Fetch and pull (`--prune` is always acti
 abbr -a qimg --set-cursor 'qemu-img create -f qcow2 %.qcow2 -o nocow=on 50G'
 
 ## Celeste ##
-abbr -a modupd 'hultra -m "wegfan,jade,otobot,gb" update --install'
-abbr -a modins 'hultra -m "wegfan,jade,otobot,gb" install'
+abbr -a modupd 'hultra -m "otobot,gb" update --install'
+abbr -a modins 'hultra -m "otobot,gb" install'

@@ -26,7 +26,7 @@ function download_videos_from
     $EDITOR $input_file
 
     # Download videos with yt-dlp using specific config file
-    yt-dlp_linux \
+    yt-dlp \
         --ignore-config \
         --config-location ~/.config/yt-dlp/$argv.conf \
         --path "temp: $tmpdir" \
