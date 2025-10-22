@@ -99,9 +99,6 @@ abbr -a wifi 'journalctl -b -eu iwd.service'
 abbr -a adhm 'journalctl -b -eu AdGuardHome.service'
 abbr -a ports 'ss -tulne4'
 
-## Wi-Fi Management ##
-abbr --add pwsv_off --set-cursor 'sudo iw dev % set power_save off'
-
 ## git ##
 abbr -a gs 'git status --short --branch'
 abbr -a ga 'git add'
@@ -124,3 +121,12 @@ abbr -a qimg --set-cursor 'qemu-img create -f qcow2 %.qcow2 -o nocow=on 50G'
 ## Celeste ##
 abbr -a modupd 'hultra -m "otobot,gb" update --install'
 abbr -a modins 'hultra -m "otobot,gb" install'
+
+## Rust ##
+abbr -a cb 'cargo build'
+abbr -a cbr 'cargo build --release'
+abbr -a cr 'cargo run'
+abbr -a crr 'cargo run --release'
+abbr -a ct 'cargo test'
+abbr -a cc 'cargo clippy --all-targets --all-features -- -D warnings'
+abbr -a ca 'cargo audit'

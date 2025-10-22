@@ -1,17 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = "$all"
-
 add_newline = true
-scan_timeout = 60
 package = { disabled = true, display_private = false, format = "is [$symbol$version]($style) ", style = "208 bold", symbol = "📦 ", version_format = "v${raw}" }
 
-[fill]
-symbol = ' '
-
-[time]
-disabled = true
-time_format = '%T'
-
-[os]
-disabled = true
+# [time]
+# disabled = true
+# time_format = '%T'

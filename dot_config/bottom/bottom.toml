@@ -92,7 +92,7 @@
 #network_use_binary_prefix = false
 
 # Displays the network widget using bytes.
-#network_use_bytes = false
+network_use_bytes = true
 
 # Displays the network widget with a log scale.
 #network_use_log = false
