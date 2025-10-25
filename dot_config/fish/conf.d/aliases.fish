@@ -90,9 +90,9 @@ abbr -a pclean 'paru -Scc'
 
 ## Journal ##
 abbr -a jctl 'journalctl -p 3 -xb'
-abbr -a jf 'journalctl -f'
+abbr -a jf 'journalctl -f | bat --paging=never -l log'
 abbr -a jeb 'journalctl -eb'
-abbr -a jcg --set-cursor 'journalctl -b -g \'%\''
+abbr -a jcg --set-cursor 'journalctl -b -g \'%\' | bat --paging=never -l log --style=-header-filename'
 
 ## Network Debugging ##
 abbr -a wifi 'journalctl -b -eu iwd.service'
@@ -114,13 +114,6 @@ abbr -a gl 'git log --graph --oneline --decorate --all'
 abbr -a grp 'git reset HEAD~' # Cancel previous commit and revert the commit back to staging area
 abbr -a grb 'git rebase -i HEAD~' # Squash multiple commits into one
 abbr -a gfp 'git fetch; and git pull' # Fetch and pull (`--prune` is always active in `~/.gitconfig`)
-
-## Virtual Machine ##
-abbr -a qimg --set-cursor 'qemu-img create -f qcow2 %.qcow2 -o nocow=on 50G'
-
-## Celeste ##
-abbr -a modupd 'hultra -m "otobot,gb" update --install'
-abbr -a modins 'hultra -m "otobot,gb" install'
 
 ## Rust ##
 abbr -a cb 'cargo build'
