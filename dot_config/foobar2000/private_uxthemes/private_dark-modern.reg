@@ -1,0 +1,56 @@
+Windows Registry Editor Version 5.00
+; This is a custom, dedicated dark theme for foobar2000 in Windows under Wine.
+; Run `wine regedit dark-modern.reg` to apply this theme for your foobar2000.
+
+[HKEY_CURRENT_USER\Control Panel\Colors]
+"ActiveBorder"="49 54 58"
+"ActiveTitle"="49 54 58"
+"AppWorkSpace"="60 64 72"
+"Background"="49 54 58"
+"ButtonAlternativeFace"="200 0 0"
+"ButtonLight"="60 64 72"
+"GradientActiveTitle"="49 54 58"
+"GradientInactiveTitle"="49 54 58"
+"InactiveBorder"="49 54 58"
+"InactiveTitle"="49 54 58"
+"InactiveTitleText"="219 220 222"
+"InfoText"="159 167 180"
+"InfoWindow"="49 54 58"
+"Menu"="49 54 58"
+"MenuBar"="49 54 58"
+"MenuText"="219 220 222"
+"TitleText"="219 220 222"
+
+; ベースカラー群
+"Window"="26 26 26"          ; メインウィンドウ背景 (#1A1A1A)
+"WindowFrame"="45 45 45"     ; フレーム境界 (#2D2D2D)
+"WindowText"="180 180 180"   ; ソフトグレーテキスト (#B4B4B4)
+
+; ヘッダー関連
+"Header"="40 40 40"             ; ヘッダー背景 (#282828)
+"HeaderText"="200 200 200"      ; ヘッダーテキスト (#C8C8C8)
+"HotTrackingColor"="74 156 130" ; アクセントカラー (#4A9C82)
+
+; インタラクティブ要素
+"ButtonFace"="40 40 40"      ; ボタン背景 (#282828)
+"ButtonText"="200 200 200"   ; ボタンテキスト (#C8C8C8)
+"Hilight"="74 156 130"       ; 選択ハイライト (#4A9C82)
+"HilightText"="240 240 240"  ; 選択テキスト (#F0F0F0)
+
+; 補助色
+"GrayText"="100 100 100"     ; 無効テキスト (#646464)
+"MenuHilight"="74 156 130"   ; メニューアクセント (#4A9C82)
+
+; スクロールバー
+"Scrollbar"="45 48 52"        ; ダークスレートグレイ (#2D3034)
+"ButtonShadow"="65 69 75"     ; ミディアムグレイ (#41454B)
+"ButtonHilight"="90 94 100"   ; ライトグレイ (#5A5E64)
+"ButtonDkShadow"="55 59 63"   ; ダークアクセント (#373B3F)
+
+[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]
+"ScrollWidth"="-255"  ; 標準値より25%縮小
+"ScrollHeight"="-300" ; ボックスの最小サイズ指定
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"FontSmoothing"="2"  ; 文字がにじむなら"0"に
+"FontSmoothingType"="1"

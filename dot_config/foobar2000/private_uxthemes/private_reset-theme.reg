@@ -1,0 +1,46 @@
+Windows Registry Editor Version 5.00
+; This file reset every registry keys to the default.
+; Run `wine regedit reset-theme.reg` to reset the applied dark theme for foobar2000.
+
+[HKEY_CURRENT_USER\Control Panel\Colors]
+"ActiveBorder"=-
+"ActiveTitle"=-
+"AppWorkSpace"=-
+"Background"=-
+"ButtonAlternativeFace"=-
+"ButtonDkShadow"=-
+"ButtonFace"=-
+"ButtonHilight"=-
+"ButtonLight"=-
+"ButtonShadow"=-
+"ButtonText"=-
+"GradientActiveTitle"=-
+"GradientInactiveTitle"=-
+"GrayText"=-
+"Header"=-
+"HeaderText"=-
+"Hilight"=-
+"HilightText"=-
+"HotTrackingColor"=-
+"InactiveBorder"=-
+"InactiveTitle"=-
+"InactiveTitleText"=-
+"InfoText"=-
+"InfoWindow"=-
+"Menu"=-
+"MenuBar"=-
+"MenuHilight"=-
+"MenuText"=-
+"Scrollbar"=-
+"TitleText"=-
+"Window"=-
+"WindowFrame"=-
+"WindowText"=-
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+"FontSmoothing"=-
+"FontSmoothingType"=-
+
+[HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics]
+"ScrollWidth"=-
+"ScrollHeight"=-
