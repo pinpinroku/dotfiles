@@ -90,9 +90,9 @@ abbr -a pclean 'paru -Scc'
 
 ## Journal ##
 abbr -a jctl 'journalctl -p 3 -xb'
-abbr -a jf 'journalctl -f | bat --paging=never -l log'
+abbr -a jf 'journalctl -f'
 abbr -a jeb 'journalctl -eb'
-abbr -a jcg --set-cursor 'journalctl -b -g \'%\' | bat --paging=never -l log --style=-header-filename'
+abbr -a jcg --set-cursor 'journalctl -b -g \'%\''
 
 ## Network Debugging ##
 abbr -a wifi 'journalctl -b -eu iwd.service'
