@@ -1,30 +1,21 @@
 [general]
-import = [ 
-  "themes/themes/kanagawa_dragon.toml",
-  # "themes/themes/kanagawa_wave.toml",
-  # "themes/themes/catppuccin_mocha.toml",
-]
 live_config_reload = true
-
-[env]
-# TERM = "xterm-256color"  # For SSH compatibility issue
-WINIT_X11_SCALE_FACTOR = "1"
+# import = [ "./themes/themes/kanagawa_dragon.toml" ]
 
 [window]
 title = "Alacritty@CachyOS"
-# dimensions = { columns = 148, lines = 40 }
 decorations = "None"  # None | Full
-opacity = 0.85
-# blur = true
 startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
+opacity = 0.75
 
 [window.class]
 instance = "Alacritty"
 general = "Alacritty"
 
 [font]
-normal = { family = "Moralerspace Argon HW", style = "Regular" }
-size = 20.0
+# normal = { family = "Moralerspace Radon HW", style = "Regular" }
+normal = { family = "IosevkaTerm NF", style = "Regular" }
+size = 18.0
 
 [selection]
 save_to_clipboard = true
