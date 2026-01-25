@@ -6,10 +6,10 @@ alias cat=bat
 alias sctl=systemctl
 
 ## Replace ls with eza ##
-alias ls='eza -al --color=always --group-directories-first --icons' # preferred listing
+alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso --smart-group' # preferred listing
 alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons' # long format
-alias lt='eza -T --color=always --group-directories-first --icons --git-ignore' # tree listing
+alias ll='eza -lh --color=always --group-directories-first --icons --time-style=long-iso --smart-group' # long format
+alias lt='eza -lT --color=always --group-directories-first --icons --git-ignore --time-style=long-iso --smart-group' # tree listing
 alias l='eza --color=always --group-directories-first --icons --sort Name' # column listing
 
 ## Common ##
@@ -90,14 +90,14 @@ abbr -a pclean 'paru -Scc'
 
 ## Journal ##
 abbr -a jctl 'journalctl -p 3 -xb'
-abbr -a jf 'journalctl -f'
+abbr -a jf 'journalctl -f -n30'
 abbr -a jeb 'journalctl -eb'
 abbr -a jcg --set-cursor 'journalctl -b -g \'%\''
 
 ## Network Debugging ##
 abbr -a wifi 'journalctl -b -eu iwd.service'
-abbr -a adhm 'journalctl -b -eu AdGuardHome.service'
-abbr -a ports 'ss -tulne4'
+abbr -a adhm 'journalctl -b -eu adguardhome.service'
+abbr -a ports 'ss -tulne'
 
 ## git ##
 abbr -a gs 'git status --short --branch'
