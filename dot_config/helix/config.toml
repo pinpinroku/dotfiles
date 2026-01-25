@@ -1,12 +1,11 @@
-# theme = "kanagawa-dragon"
-theme = "tokyonight_storm"
-
+theme = "kanagawa-dragon"
+ 
 [editor]
 mouse = false
 line-number = "relative"
 gutters = ["diagnostics", "line-numbers", "spacer", "diff"]
 true-color = true
-cursorline = false
+cursorline = true
 undercurl = true
 auto-save = true
 bufferline = "multiple"
