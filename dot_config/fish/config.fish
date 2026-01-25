@@ -3,23 +3,6 @@ if status --is-interactive
         fastfetch
     end
 
-    # Starshipt prompt
-    set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship-mokka.toml"
-
-    # Text editor
-    set -gx EDITOR /usr/bin/helix
-    set -gx VISUAL /usr/bin/helix
-
-    # bat: cat replacement
-    set -gx BAT_STYLE 'snip,changes,header'
-
-    # fzf: A command-line fuzzy finder
-    set -gx FZF_DEFAULT_OPTS '--ansi --reverse'
-    set -gx FZF_DEFAULT_COMMAND 'fd --hidden --exclude .git --color=always'
-
-    # mpd: Music Player Daemon
-    set -gx MPD_HOST "$XDG_RUNTIME_DIR/mpd/socket"
-
     ## Autostart zellij if the terminal is alacritty ##
     # if test $TERM = alacritty
     #     set ZELLIJ_AUTO_ATTACH true
@@ -50,5 +33,5 @@ if status --is-interactive
 
     ## Others
     starship init fish | source
-    zoxide init fish | source
+    zoxide init fish | source # must be initialized at the end
 end
