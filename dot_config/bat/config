@@ -1,0 +1,10 @@
+# Specify desired highlighting theme.
+--theme="Catppuccin Macchiato"
+
+# Enable this to use italic text on the terminal.
+--italic-text=always
+
+# Syntax mappings: map a certain filename pattern to a language.
+--map-syntax "mpd.conf:bash"
+--map-syntax "{aria2.conf,mpv.conf}:INI"
+--map-syntax "**/yt-dlp/{*.conf,config}:bash"
