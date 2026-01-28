@@ -6,19 +6,20 @@ alias cat=bat
 alias sctl=systemctl
 
 ## Replace ls with eza ##
-alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso --smart-group' # preferred listing
+alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso' # preferred listing
 alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll='eza -lh --color=always --group-directories-first --icons --time-style=long-iso --smart-group' # long format
-alias lt='eza -lT --color=always --group-directories-first --icons --git-ignore --time-style=long-iso --smart-group' # tree listing
+alias ll='eza -lh --color=always --group-directories-first --icons --time-style=long-iso' # long format
+alias lt='eza -lT --color=always --group-directories-first --icons --git-ignore --time-style=long-iso' # tree listing
 alias l='eza --color=always --group-directories-first --icons --sort Name' # column listing
 
 ## Common ##
 abbr -a cl clear
 abbr -a cp 'cp -iv'
 abbr -a mv 'mv -iv'
-abbr -a rm 'rm -v'
+abbr -a rm 'rm -iv'
 abbr -a ip 'ip -color=always'
 abbr -a mkdir 'mkdir -v'
+abbr -a rmdir 'rmdir -v'
 
 ## Edit Documents ##
 abbr -a todo 'helix --working-dir ~/note/ ~/note/todo.md'

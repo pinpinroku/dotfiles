@@ -3,6 +3,9 @@ if status --is-interactive
         fastfetch
     end
 
+    ## Prepend paths ##
+    fish_add_path "$HOME/.local/bin" "$HOME/.cargo/bin"
+
     ## Autostart zellij if the terminal is alacritty ##
     # if test $TERM = alacritty
     #     set ZELLIJ_AUTO_ATTACH true
@@ -12,26 +15,22 @@ if status --is-interactive
 
     ## Set vi mode ##
     set -g fish_key_bindings fish_vi_key_bindings
-    set -eU fish_key_bindings # cleanup old universal settings
-
-    ## Cursor shape
     set fish_cursor_default block
     set fish_cursor_insert line
 
-    ## Command color
+    ## Command color ##
     set -g fish_color_command brcyan
 
-    ## Initialize atuin: CLI history manager
+    ## atuin: CLI history manager ##
     atuin init fish | source
-    set -g fish_history "" # disable default fish history
 
-    ## Keybindings
+    ## Keybindings ##
     function fish_user_key_bindings
         # Change default incremental search function to atuin
         bind -M default / _atuin_search
     end
 
-    ## Others
+    ## Others ##
     starship init fish | source
     zoxide init fish | source # must be initialized at the end
 end

@@ -14,3 +14,7 @@ set -gx FZF_DEFAULT_COMMAND 'fd --hidden --exclude .git --color=always'
 
 # mpd: Music Player Daemon
 set -gx MPD_HOST "$XDG_RUNTIME_DIR/mpd/socket"
+
+# Format man pages
+set -gx MANROFFOPT -c
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
