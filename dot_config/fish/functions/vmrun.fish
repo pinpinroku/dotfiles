@@ -12,10 +12,10 @@
 # Features:
 # - High-performance configuration with 12 CPU cores and 16GB RAM
 # - Memory backend optimization for better performance
-# - SSH port forwarding (host:8888 -> guest:22)
 # - PipeWire audio support with virtio model
 # - USB tablet for better mouse integration
 # - GPU acceleration with OpenGL support
+# - VHost conncetion enabled
 #
 # Examples: 
 # ./run.fish /path/to/ubuntu-22.04.qcow2 gtk
@@ -65,21 +65,21 @@ function vmrun
     echo "Image: $image"
     echo "Display: $display"
 
-    # -vga virtio \
     # Launch QEMU with validated parameters
     qemu-system-x86_64 \
         -accel kvm \
         -M q35 \
-        -smp cores=12 \
-        -m 16G \
         -cpu host \
-        -nic user,ipv6=off,hostfwd=tcp::8888-:22 \
+        -smp 12,cores=6,threads=2,sockets=1 \
+        -m 16G \
+        -object memory-backend-memfd,id=mem1,size=16G,share=on,prealloc=on \
+        -machine memory-backend=mem1 \
+        -nic user,ipv6=off \
+        -device vhost-vsock-pci,id=vhost-vsock-pci0,guest-cid=555 \
         -device virtio-vga-gl \
         -display $display,gl=on \
         -audio pipewire,model=virtio \
         -usb -device usb-tablet \
-        -object memory-backend-memfd,id=mem1,size=16G \
-        -machine memory-backend=mem1 \
         -hda $image \
         -full-screen
 end
