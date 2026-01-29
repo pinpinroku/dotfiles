@@ -26,7 +26,7 @@ function vminstall
     # Check if ISO argument is provided
     if test (count $argv) -ne 1
         echo "Usage: $(path basename -E (status -f)) </path/to/image-file.iso>"
-        exit 1
+        return 1
     end
 
     set ISO $argv[1]
@@ -34,7 +34,7 @@ function vminstall
     # Validate ISO file exists
     if not test -f $ISO
         echo "Error: ISO file '$ISO' not found."
-        exit 1
+        return 1
     end
 
     # Generate IMG file path by changing extension from .iso to .qcow2
@@ -47,7 +47,7 @@ function vminstall
     # Check if the directory is mounted or not
     if not mountpoint -q /mnt/vms
         echo "Error: /mnt/vms is not mounted!"
-        exit 1
+        return 1
     end
 
     # Check if IMG file already exists
@@ -57,14 +57,14 @@ function vminstall
         read -P "> " confirm
         if not string match -qi "y*" $confirm
             echo "Aborted."
-            exit 0
+            return 0
         end
     else
         echo "Creating disk image..."
         qemu-img create -f qcow2 $IMG -o nocow=on 50G
         if test $status -ne 0
             echo "Error: Failed to create disk image."
-            exit 1
+            return 1
         end
         echo "Disk image created successfully."
     end

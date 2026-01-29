@@ -35,7 +35,7 @@ function vmrun
         echo "Examples:"
         echo "  $(status -f) /path/to/vm.qcow2 gtk"
         echo "  $(status -f) /path/to/vm.qcow2 sdl"
-        exit 1
+        return 1
     end
 
     set image $argv[1]
@@ -44,21 +44,21 @@ function vmrun
     # Validate image file path existence
     if not test -f $image
         echo "Error: Image file '$image' not found."
-        exit 1
+        return 1
     end
 
     # Validate image file extension (.qcow2)
     if not string match -q "*.qcow2" $image
         echo "Error: Image file must have .qcow2 extension."
         echo "Provided: $image"
-        exit 1
+        return 1
     end
 
     # Validate display backend (gtk or sdl)
     if not contains $display gtk sdl
         echo "Error: Invalid display backend '$display'."
         echo "Valid values: gtk, sdl"
-        exit 1
+        return 1
     end
 
     echo "Starting QEMU VM..."
@@ -69,7 +69,7 @@ function vmrun
     qemu-system-x86_64 \
         -accel kvm \
         -M q35 \
-        -cpu host \
+        -cpu host,+topoext \
         -smp 12,cores=6,threads=2,sockets=1 \
         -m 16G \
         -object memory-backend-memfd,id=mem1,size=16G,share=on,prealloc=on \
