@@ -15,20 +15,6 @@ if status --is-interactive
 
     ## Set vi mode ##
     set -g fish_key_bindings fish_vi_key_bindings
-    set fish_cursor_default block
-    set fish_cursor_insert line
-
-    ## Command color ##
-    set -g fish_color_command brcyan
-
-    ## atuin: CLI history manager ##
-    atuin init fish | source
-
-    ## Keybindings ##
-    function fish_user_key_bindings
-        # Change default incremental search function to atuin
-        bind -M default / _atuin_search
-    end
 
     ## Others ##
     starship init fish | source

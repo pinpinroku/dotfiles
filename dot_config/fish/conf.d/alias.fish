@@ -55,7 +55,7 @@ abbr -a ffm 'ffmpeg -hide_banner'
 abbr -a ffp 'ffprobe -hide_banner'
 abbr -a ffshow 'ffprobe -v error -show_streams -select_streams v -of default=noprint_wrappers=1'
 abbr -a getfps --set-cursor 'ffprobe -v error -select_streams v -show_entries stream=r_frame_rate -of default=noprint_wrappers=1:nokey=1 % | math'
-abbr -a --position anywhere -- -mc '-map_metadata -1 -c copy'
+abbr -a --command ffmpeg mc -- '-map_metadata -1 -c copy'
 
 ## Media player ##
 abbr -a mna 'mpv --no-resume-playback --no-audio'
