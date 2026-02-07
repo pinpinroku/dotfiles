@@ -5,6 +5,11 @@ alias zl=zellij
 alias cat=bat
 alias sctl=systemctl
 
+## KMS ##
+set -gx KMS_DIR "$HOME/knowledge/"
+abbr -a kn 'helix --working-dir $KMS_DIR "$KMS_DIR/inbox/$(date +%Y-%m-%d).md"'
+abbr -a ks 'helix --working-dir $KMS_DIR'
+
 ## Replace ls with eza ##
 alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso' # preferred listing
 alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
@@ -16,7 +21,7 @@ alias l='eza --color=always --group-directories-first --icons --sort Name' # col
 abbr -a cl clear
 abbr -a cp 'cp -iv'
 abbr -a mv 'mv -iv'
-abbr -a rm 'rm -iv'
+abbr -a rm 'rm -v'
 abbr -a ip 'ip -color=always'
 abbr -a mkdir 'mkdir -v'
 abbr -a rmdir 'rmdir -v'
@@ -61,6 +66,9 @@ abbr -a --command ffmpeg mc -- '-map_metadata -1 -c copy'
 abbr -a mna 'mpv --no-resume-playback --no-audio'
 abbr -a mpm 'mpv --profile=music'
 abbr -a rsong --set-cursor 'fd \'\.(m4a|mp3|opus|flac%)$\' -tf -a --base-directory ~/Music/ -X mpv --profile=music --shuffle'
+abbr -a select-album 'fd . -td --exact-depth 2 --base-directory ~/Music/ | \
+    sk --reverse --preview \
+    "eza --long --no-permissions --no-time --no-user --no-filesize --no-quotes --icons --color=always --ignore-glob *.jpg ~/Music/{}"'
 
 ## systemctl ##
 abbr -a scs 'systemctl status'
@@ -106,7 +114,7 @@ abbr -a ga 'git add'
 abbr -a gp 'git push'
 abbr -a gr 'git remote -v'
 abbr -a gb 'git branch -av'
-abbr -a gbd 'git branch -D'
+abbr -a gbd 'git branch -d'
 abbr -a gc 'git commit -v'
 abbr -a gd 'git diff'
 abbr -a gm 'git merge'
