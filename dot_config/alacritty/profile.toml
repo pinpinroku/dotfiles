@@ -1,6 +1,6 @@
 [general]
 live_config_reload = true
-# import = [ "./themes/themes/kanagawa_dragon.toml" ]
+import = [ "./themes/themes/nord.toml" ]
 
 [window]
 title = "Alacritty@CachyOS"
@@ -32,3 +32,6 @@ shell = { program = "/usr/bin/fish" }
 
 [mouse]
 hide_when_typing = true
+
+[colors]
+transparent_background_colors = false
