@@ -1,20 +1,5 @@
+[language-server.rust-analyzer.config]
+diagnostics = { enable = false }
+
 [language-server.rust-analyzer.config.check]
 command = "clippy"
-
-[[language]]
-name = "python"
-roots = ["pyproject.toml"]
-language-servers = ["basedpyright", "ruff"]
-auto-format = true
-
-[language-server.ruff]
-command = "ruff"
-args = ["server"]
-
-[language-server.ruff.config.settings]
-lineLength = 79
-
-[language-server.ruff.config.settings.lint]
-extendSelect = ["UP", "ANN", "ASYNC", "I", "N", "C4", "D"]
-ignore = ["E501", "ANN101", "ANN102", "D203", "D213"]
-preview = false  # unstable rules and fixes
