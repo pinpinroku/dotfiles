@@ -1,6 +1,3 @@
-# Specify desired highlighting theme.
---theme="Catppuccin Macchiato"
-
 # Enable this to use italic text on the terminal.
 --italic-text=always
 

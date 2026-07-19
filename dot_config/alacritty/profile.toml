@@ -6,32 +6,31 @@ import = [ "./themes/themes/nord.toml" ]
 title = "Alacritty@CachyOS"
 decorations = "None"  # None | Full
 startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
-opacity = 0.75
+# opacity = 0.84
+resize_increments = true
 
 [window.class]
 instance = "Alacritty"
 general = "Alacritty"
 
 [font]
-# normal = { family = "Moralerspace Radon HW", style = "Regular" }
-normal = { family = "IosevkaTerm NF", style = "Regular" }
-size = 18.0
+normal = { family = "Moralerspace Argon HW", style = "Regular" }
+size = 20.0
 
 [selection]
 save_to_clipboard = true
 
 [cursor]
-style = { shape = "Beam", blinking = "On" }
-vi_mode_style = { shape = "Block", blinking = "Off" }
-blink_timeout = 5
 unfocused_hollow = false
 thickness = 0.3
 
-[terminal]
-shell = { program = "/usr/bin/fish" }
+[terminal.shell]
+program = "/usr/bin/fish"
 
 [mouse]
 hide_when_typing = true
 
 [colors]
-transparent_background_colors = false
+# Whether or not `window.opacity` applies to all cell backgrounds, or only to the default background.
+# When set to true all cells will be transparent regardless of their background color.
+# transparent_background_colors = true

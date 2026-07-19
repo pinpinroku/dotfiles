@@ -1,11 +1,11 @@
 #################### QEMU VM Installation Script #############################
-# 
+#
 # This script creates a new QEMU virtual machine for OS installation.
 # It automatically generates a qcow2 disk image from the provided ISO filename
 # and launches QEMU with appropriate settings for installation.
 #
 # Usage: ./install.fish <iso-file>
-# 
+#
 # Features:
 # - Automatically creates a 50GB qcow2 disk image in the `/mnt/vms/`
 # - Uses KVM acceleration for better performance

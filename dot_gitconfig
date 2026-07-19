@@ -4,7 +4,11 @@
 	name = pinpinroku
 	email = pinpinroku11600@tutanota.com
 [core]
-	pager = delta
+    pager = bat --plain --color=always
+[pager]
+    diff = delta
+    show = delta
+	log = bat --plain --color=always
 [commit]
 	template = ~/.gitmessage
 [fetch]
@@ -18,14 +22,12 @@
 	dark = true
 	side-by-side = true
 	line-numbers = true
-	features = "Knagawa"
 [diff]
 	colorMoved = default
 [merge]
 	conflictstyle = zdiff3
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = !/usr/bin/gh auth git-credential
 [push]
 	autoSetupRemote = true
+[credential]
+	helper = cache --timeout=3600
+	helper = /usr/lib/git-core/git-credential-libsecret

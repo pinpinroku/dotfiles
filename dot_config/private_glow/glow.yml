@@ -1,8 +1,8 @@
 # style name or JSON path (default "auto")
-style: "tokyo-night"
+style: "dracula"
 # mouse support (TUI-mode only)
 mouse: false
 # use pager to display markdown
 pager: true
 # word-wrap at width
-width: 80
+width: 120

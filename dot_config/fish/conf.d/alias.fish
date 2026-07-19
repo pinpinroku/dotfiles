@@ -5,17 +5,13 @@ alias zl=zellij
 alias cat=bat
 alias sctl=systemctl
 
-## KMS ##
-set -gx KMS_DIR "$HOME/knowledge/"
-abbr -a kn 'helix --working-dir $KMS_DIR "$KMS_DIR/inbox/$(date +%Y-%m-%d).md"'
-abbr -a ks 'helix --working-dir $KMS_DIR'
-
 ## Replace ls with eza ##
-alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons' # all files and dirs
-alias ll='eza -lh --color=always --group-directories-first --icons --time-style=long-iso' # long format
-alias lt='eza -lT --color=always --group-directories-first --icons --git-ignore --time-style=long-iso' # tree listing
-alias l='eza --color=always --group-directories-first --icons --sort Name' # column listing
+# alias ls='eza -alh --color=always --group-directories-first --icons --time-style=long-iso' # preferred listing
+alias ls='eza -la --color=always --group-directories-first --icons=auto' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons=auto' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first --icons=auto --time-style=long-iso' # long format
+alias lt='eza -lT --color=always --group-directories-first --icons=auto --git-ignore --time-style=long-iso' # tree listing
+alias l='eza --color=always --group-directories-first --icons=auto --sort Name' # column listing
 
 ## Common ##
 abbr -a cl clear
@@ -27,7 +23,7 @@ abbr -a mkdir 'mkdir -v'
 abbr -a rmdir 'rmdir -v'
 
 ## Edit Documents ##
-abbr -a todo 'helix --working-dir ~/note/ ~/note/todo.md'
+abbr -a todo 'helix --working-dir ~/note/ ~/note/00-todo.md'
 abbr -a note 'helix --working-dir ~/note/'
 abbr -a fig 'helix --working-dir ~/.config/fish/'
 
@@ -91,11 +87,7 @@ abbr -a search 'pacman -Ss'
 abbr -a install 'sudo pacman -S'
 abbr -a remove 'sudo pacman -Rns'
 abbr -a info 'pacman -Qi'
-abbr -a foreign 'pacman -Qm' # Shows packages installed by paru
-
-## AUR helper ##
-abbr -a pupdate 'paru -Sua'
-abbr -a pclean 'paru -Scc'
+abbr -a foreign 'pacman -Qm' # Shows packages installed from AUR
 
 ## Journal ##
 abbr -a jctl 'journalctl -p 3 -xb'
@@ -107,6 +99,9 @@ abbr -a jcg --set-cursor 'journalctl -b -g \'%\''
 abbr -a wifi 'journalctl -b -eu iwd.service'
 abbr -a adhm 'journalctl -b -eu adguardhome.service'
 abbr -a ports 'ss -tulne'
+
+## Wayland Debugging ##
+abbr -a show-debug-console 'qdbus6 org.kde.KWin /KWin org.kde.KWin.showDebugConsole'
 
 ## git ##
 abbr -a gs 'git status --short --branch'
@@ -132,3 +127,4 @@ abbr -a crr 'cargo run --release'
 abbr -a ct 'cargo test'
 abbr -a cc 'cargo clippy --all-targets --all-features -- -D warnings'
 abbr -a ca 'cargo audit'
+abbr -a cf 'cargo fmt -- --check'

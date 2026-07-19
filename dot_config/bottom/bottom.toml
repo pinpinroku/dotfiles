@@ -92,7 +92,7 @@
 #network_use_binary_prefix = false
 
 # Displays the network widget using bytes.
-network_use_bytes = true
+network_graph.use_bytes = true
 
 # Displays the network widget with a log scale.
 #network_use_log = false
@@ -104,7 +104,7 @@ network_use_bytes = true
 #disable_gpu = false
 
 # Shows cache and buffer memory
-enable_cache_memory = true
+memory.cache_memory = true
 
 # How much data is stored at once in terms of time.
 #retention = "10m"

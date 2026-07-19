@@ -2,11 +2,9 @@
 set -gx EDITOR /usr/bin/helix
 set -gx VISUAL /usr/bin/helix
 
-# Cutstom starship prompt
-set -gx STARSHIP_CONFIG "$HOME/.config/starship/starship-mokka.toml"
-
 # bat: cat replacement
 set -gx BAT_STYLE 'snip,changes,header'
+set -gx BAT_THEME Nord
 
 # fzf: A command-line fuzzy finder
 set -gx FZF_DEFAULT_OPTS '--ansi --reverse'
