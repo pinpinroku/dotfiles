@@ -4,9 +4,10 @@ import = [ "./themes/themes/nord.toml" ]
 
 [window]
 title = "Alacritty@CachyOS"
-decorations = "None"  # None | Full
-startup_mode = "Maximized"  # "Windowed" | "Maximized" | "Fullscreen"
-# opacity = 0.84
+decorations = "Full"  # None | Full
+startup_mode = "Windowed"  # "Windowed" | "Maximized" | "Fullscreen"
+dimensions = { columns = 156, lines = 42 }
+# opacity = 0.7
 resize_increments = true
 
 [window.class]
@@ -15,7 +16,7 @@ general = "Alacritty"
 
 [font]
 normal = { family = "Moralerspace Argon HW", style = "Regular" }
-size = 20.0
+size = 18.0
 
 [selection]
 save_to_clipboard = true
